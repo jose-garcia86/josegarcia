@@ -9,12 +9,22 @@
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-800"> Hi, I'm Jose</h2>
             <p class="font-light text-gray-500 sm:text-xl">Welcome to my place. I’m passionate about development, technology, and infrastructure. I love experimenting with new ideas. I hope you enjoy the content!</p>
             <h3 class="mt-4 mb-2 text-2xl tracking-tight font-normal text-gray-800">Work</h3>
-            <p class="font-light text-gray-500 sm:text-l">Currently I'm working at <a href="https://www.ingrammicro.com/" class="text-blue-600 hover:text-blue-800">Ingram Micro</a> as a Software Engineer</p>
+            <p class="font-light text-gray-500 sm:text-l">Currently I'm working at <a href="https://www.arcadis.com/" target="_blank" class="text-blue-600 hover:text-blue-800">Arcadis</a> as a Civil Engineer</p>
             <h3 class="mt-4 mb-2 text-2xl tracking-tight font-normal text-gray-800">Bio</h3>
-            <div class="grid gap-2 py-2 grid-cols-2 auto-cols-min grid-flow-col  mx-auto max-w-screen-md">
+            <div class="flex flex-row gap-4 mx-auto max-w-screen-md">
                 <span class="text-gray-800 font-bold">1986</span>
-                <p class="text-gray-800 font-light">Born in Spain</p>
+                <p class="col-span-2 text-gray-500 font-light">Born in Spain</p>
             </div>
+            <div class="flex flex-row gap-4 mx-auto max-w-screen-md">
+                <span class="text-gray-800 font-bold">2013</span>
+                <p class="col-span-2 text-gray-500 font-light">Completed the Master's Program in Water Resources with a specialization in Hydrodynamics at the University of Granada</p>
+            </div>
+            <div class="flex flex-row gap-4 mx-auto max-w-screen-md">
+                <span class="text-gray-800 font-bold">2015 to present</span>
+                <p class="col-span-2 text-gray-500 font-light">Working as Civil Engineer at <a href="https://www.arcadis.com/" target="_blank" class="text-blue-600 hover:text-blue-800">Arcadis</a></p>
+            </div>
+            <h3 class="mt-4 mb-2 text-2xl tracking-tight font-normal text-gray-800">I ❤️ </h3>
+            <p class="col-span-2 text-gray-500 font-light">Art 🖼️, Music 🎧, Nature 🌲, Programming 👨‍💻, Machine Learning 🧑‍🏫</p>
         <div class="divide-y divide-gray-200">
             {{ with .Site.GetPage "/posts" }}
             {{ range $paginator.Pages }}
