@@ -1,0 +1,24 @@
+{{ define "main" }}
+<section class="bg-white">
+    <div class="grid gap-4 py-8 px-4 mx-auto max-w-screen-md lg:gap-4 lg:grid-cols-1 lg:py-16 lg:px-6 ">
+        <div>
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-800"> Microposts</h2>
+            <p class="font-light text-gray-500 sm:text-xl">My thoughts on topics on my mind</p>
+        </div> 
+        <div class="divide-y divide-gray-200">
+            {{ range .Paginator.Pages }}
+            <article class="mt-4 py-6">
+                <div class="flex justify-between items-center mb-5 text-gray-500">
+                    <span class="text-sm text-blue-600">{{ dateFormat .Site.Params.dateFormatMicroblog .Date }}</span>
+                </div>
+                <h2 class="mb-2 text-3xl font-bold tracking-tight text-gray-800">
+                    {{ .Title }}
+                </h2>
+                <div class="mb-5 font-light text-gray-500 text-lg leading-9"> {{ .Content }} </div>
+                <hr class="h-px my-8 bg-gray-200 border-0">
+            </article> 
+            {{ end}}
+        </div>  
+    </div>
+    </section>
+{{ end }}

@@ -1,0 +1,57 @@
+{{ define "main" }}
+
+{{ $pages := where site.RegularPages "Type" "posts" }}
+{{ $paginator := .Paginate $pages }}
+
+<section class="bg-white">
+    <div class="grid gap-8 py-8 px-4 mx-auto max-w-screen-md ">
+        <div>
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-800"> Hi, I'm Jose</h2>
+            <p class="font-light text-gray-500 sm:text-xl">Welcome to my place. I’m passionate about development, technology, and infrastructure. I love experimenting with new ideas. I hope you enjoy the content!</p>
+            <h3 class="mt-4 mb-2 text-2xl tracking-tight font-normal text-gray-800">Work</h3>
+            <p class="font-light text-gray-500 sm:text-l">Currently I'm working at <a href="https://www.ingrammicro.com/" class="text-blue-600 hover:text-blue-800">Ingram Micro</a> as a Software Engineer</p>
+            <h3 class="mt-4 mb-2 text-2xl tracking-tight font-normal text-gray-800">Bio</h3>
+            <div class="grid gap-2 py-2 grid-cols-2 auto-cols-min grid-flow-col  mx-auto max-w-screen-md">
+                <span class="text-gray-800 font-bold">1986</span>
+                <p class="text-gray-800 font-light">Born in Spain</p>
+            </div>
+        <div class="divide-y divide-gray-200">
+            {{ with .Site.GetPage "/posts" }}
+            {{ range $paginator.Pages }}
+                    <article class="mt-8 py-6">
+                        <div class="flex justify-between items-center mb-5 text-gray-500">
+                            <span class="bg-blue-600  text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded">
+                                {{ range (.GetTerms "categories") }}
+                                    <p class="text-gray-100 hover:text-gray-400"> {{ .Name }} </p>
+                                {{ end }}                   
+                            </span>
+                            <span class="text-sm">{{ dateFormat .Site.Params.dateFormat .Date }}</span>
+                        </div>
+                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-800">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h2>
+                        <p class="mb-5 font-light text-gray-900"> {{ .Params.description }} </p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-4">
+                                <img class="w-7 h-7 rounded-full" src={{ .Params.avatar }} alt="Jose Garcia portrait" loading="lazy">
+                                <span class="font-medium text-gray-800">
+                                    {{ range (.GetTerms "authors") }}
+                                        {{ .Name }}
+                                    {{ end }}
+                                </span>
+                            </div>
+                            <a href="{{ .Permalink }}" class="inline-flex items-center font-medium text-blue-600 hover:underline dark:text-primary-500">
+                                Read more
+                                <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </a>
+                        </div>
+                    </article> 
+                {{ end}}
+            {{ end }}
+        </div>
+    </div>
+    <div class="flex justify-center">
+        {{ partial "pagination.html" . }}
+    </div>
+    </section>
+{{ end }}
