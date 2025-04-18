@@ -10,7 +10,8 @@ title = 'Jose Garcia | Web Developer'
 [params]
   dateFormat = 'Jan 02, 2006'
   dateFormatMicroblog = 'January 02, 2006'
-  description = "Personal blog about development, technology, and infrastructure. I hope you enjoy the content!"
+  title = "Hi! I'm Jose."
+  description = "I'm civil Engineer leading multidisciplinary projects in water resources management and hydraulic engineering, with focus on developing innovative solutions through computational modeling and data analysis."
   head_image = "/images/jose-garcia-head.jpeg"
 
 [taxonomies]

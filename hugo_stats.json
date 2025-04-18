@@ -35,7 +35,6 @@
     "classes": [
       "-space-x-px",
       "antialiased",
-      "auto-cols-min",
       "bg-blue-600",
       "bg-gray-200",
       "bg-gray-50",
@@ -73,12 +72,9 @@
       "format-blue",
       "format-sm",
       "gap-12",
-      "gap-2",
       "gap-4",
       "gap-8",
       "grid",
-      "grid-cols-2",
-      "grid-flow-col",
       "h-10",
       "h-4",
       "h-5",
@@ -230,11 +226,13 @@
       "concurrency",
       "data-science-and-machine-learning",
       "devops-tools",
+      "education",
       "embedded-systems",
       "extensive-libraries-and-frameworks",
       "game-development",
       "interpreted-language",
       "key-features",
+      "language-skills",
       "memory-safety",
       "navbar-default",
       "networking",
@@ -245,9 +243,11 @@
       "scientific-computing",
       "simplicity-and-readability",
       "standard-library",
+      "tech-skills",
       "versatility",
       "web-development",
-      "webassembly"
+      "webassembly",
+      "work"
     ]
   }
 }

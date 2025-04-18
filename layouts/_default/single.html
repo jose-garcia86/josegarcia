@@ -4,13 +4,15 @@
         <article class="mx-auto w-full format format-sm sm:format-base lg:format-lg format-blue">
             <header class="mb-4 lg:mb-6 not-format">
                 <h1 class="mb-4 text-5xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl ">{{ .Title }}</h1>
-                <address class="flex items-center mb-6 not-italic">
-                    <div class="inline-flex items-center mr-3 text-sm text-gray-900 ">
-                        <div>
-                            <p class="text-base text-gray-500 italic "> Written by <span class="text-blue-600">{{ range (.GetTerms "authors") }} {{ .Name }} {{ end }}</span> on <time>{{ dateFormat .Site.Params.dateFormat .Date }}</time></p>
-                        </div>
-                    </div>
-                </address>
+                {{ if .Params.authors }}
+                     <address class="flex items-center mb-6 not-italic">
+                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 ">
+                             <div>
+                                 <p class="text-base text-gray-500 italic "> Written by <span class="text-blue-600">{{ range (.GetTerms "authors") }} {{ .Name }} {{ end }}</span> on <time>{{ dateFormat .Site.Params.dateFormat .Date }}</time></p>
+                             </div>
+                         </div>
+                     </address>
+                {{ end }}
             </header>
             <p class="lead">{{ .Description }}</p>
             <div class="text-gray-800">
