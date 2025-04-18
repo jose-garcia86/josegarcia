@@ -1,6 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
-title = 'Jose Garcia | Web Developer'
+title = 'Jose Garcia | Scientific Developer'
 
 [pagination]
   disableAliases = false
