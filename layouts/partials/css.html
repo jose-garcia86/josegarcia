@@ -1,4 +1,4 @@
-
+{{ with (templates.Defer (dict "key" "global")) }}
   {{ with resources.Get "css/main.css" }}
     {{ $opts := dict
       "minify" hugo.IsProduction
@@ -14,3 +14,4 @@
       {{ end }}
     {{ end }}
   {{ end }}
+{{ end }}

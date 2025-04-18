@@ -48,7 +48,7 @@ title = 'Jose Garcia | Scientific Developer'
     toLower = false
     type = 'basic'
     weight = 100
-
+    
 [build]
   [build.buildStats]
     enable = true
