@@ -1,5 +1,7 @@
 # The URL the site will be built for
 base_url = "https://josegarcia.dev"
+title = "Jose Garcia"
+description = "Blog about technology, programming, and more."
 default_language = "en"
 #Enable theme
 theme = "inkspire"
