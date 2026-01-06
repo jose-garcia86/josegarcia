@@ -223,9 +223,6 @@ url = "/atom.xml"
 
 # ENGLISH (default language)
 [languages.en]
-# The site title and description; used in feeds by default.
-title = "Inkspire"
-description = "A elegant and modern theme for Zola"
 taxonomies = [
     { name = "categories", feed = true, paginate_by = 10 },
     { name = "tags", feed = true, paginate_by = 10 },
