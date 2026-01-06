@@ -213,9 +213,6 @@ url = "/about"
 name = "RSS"
 url = "/atom.xml"
 
-[[extra.footer.en]]
-name = "Style Guide"
-url = "/style-guide"
 
 # Additional languages definition
 # You can define language specific config values and translations:
