@@ -1,0 +1,58 @@
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+            <h2 class="newsletter-title">Subscribe to the newsletter</h2>
+            <p class="newsletter-description">
+                Get notified when new articles are published. No spam,
+                unsubscribe anytime.
+            </p>
+
+            <form class="newsletter-form" action="#" method="post">
+                <div class="form-group">
+                    <input
+                        type="email"
+                        class="newsletter-input"
+                        placeholder="your@email.com"
+                        required
+                        aria-label="Email address"
+                    />
+                    <button type="submit" class="newsletter-button">
+                        Subscribe
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Divider -->
+        <div class="footer-divider"></div>
+
+        <!-- Footer Links & Info -->
+        <ul class="footer-content">
+            {% set current_lang = lang | default(value=config.default_language) %}
+            {% if current_lang == "en" %}
+                {% set footer = config.extra.footer.en %}
+            {% elif current_lang == "es" %}
+                {% set footer = config.extra.footer.es %}
+            {% else %}
+                {% set footer = config.extra.footer.en %}
+            {% endif %}
+            {% for item in footer %}
+                <li class="footer-links"><a href="{{ item.url | safe }}" class="footer-link">{{ item.name }}</a></li>
+            {% endfor %}
+
+        </ul>
+        <div class="footer-info">
+            <p class="copyright">
+             {%- if config.extra.footer -%}
+            © 2025 {{ config.extra.author | default(value="Clubhype")}}. {{ config.extra.footer.info |
+            default(value='Powered by Zola and Clubhype.') | safe }}
+            {%- else -%}
+            © 2025 Clubhype. Powered by <a href="https://www.getzola.org"><u>Zola</u></a> and <a
+            href="#">Inkspire</a>.
+            {%- endif -%}
+            </p>
+        </div>
+    </div>
+</footer>

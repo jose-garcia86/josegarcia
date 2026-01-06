@@ -1,0 +1,22 @@
+{% extends "base.html"%} {% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ config.extra.expressions.tags | default(value="Tags") }}</h1>
+        <p>Explore all the topics we cover</p>
+    </div>
+
+    <div class="topics-count">{{ terms | length }} TOPICS</div>
+
+    <div class="tags-grid">
+        {% for tag in terms %}
+        <div class="tag-card">
+            <a href="{{ tag.permalink | safe }}">
+                <div class="tag-name">{{tag.name}}</div>
+                <div class="tag-count">{{ tag.pages | length }} posts</div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,115 @@
+<header>
+    <!-- Mobile Menu Backdrop -->
+    <div class="mobile-menu-backdrop"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="{{ config.base_url }}" class="logo-link">
+                    <span class="logo-text">{{ config.title }}</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <ul class="desktop-nav">
+                {% set current_lang = lang | default(value=config.default_language) %}
+                {% if current_lang == "en" %}
+                    {% set menu = config.extra.menu.en %}
+                {% elif current_lang == "es" %}
+                    {% set menu = config.extra.menu.es %}
+                {% else %}
+                    {% set menu = config.extra.menu.en %}
+                {% endif %}
+
+                {% for item in menu %}
+                    <li class="{% if item.children %} dropdown-container {% endif %}">
+                        {% if item.children %}
+                            <button class="nav-link dropdown-trigger">
+                                <span>{{ item.name }}</span>
+                                <svg class="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu">
+                                {% for child in item.children %}
+                                    <a href="{{ child.url | safe }}" class="dropdown-item">{{ child.name }}</a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <a href="{{ item.url | safe }}" class="nav-link">{{ item.name }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Language Switcher -->
+            {% if config.languages %}
+            <div class="desktop-lang dropdown-container">
+                <button type="button" id="lang-btn" class="logo-icon nav-link dropdown-trigger">
+                    <svg class="size-[18px]" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 -960 960 960">
+                    <path d="m476-80 182-480h84L924-80h-84l-43-122H603L560-80h-84ZM160-200l-56-56 202-202q-35-35-63.5-80T190-640h84q20 39 40 68t48 58q33-33 68.5-92.5T484-720H40v-80h280v-80h80v80h280v80H564q-21 72-63 148t-83 116l96 98-30 82-122-125-202 201Zm468-72h144l-72-204-72 204Z" />
+                    </svg>
+                </button>
+                <ul class="dropdown-menu">
+                    {% for lang_code, language in config.languages %}
+                    <li class="dropdown-item">
+                        <a {% if lang_code != "en" %} href="/{{ lang_code }}" {% else %} href="/" {% endif %} class="dropdown-item" {% if lang == lang_code %} class="active" {% endif %}>{{ language.translations.language_name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- Mobile Hamburger Menu -->
+            <button class="hamburger">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <!-- Close Button -->
+            <button class="mobile-close-btn">
+                <svg class="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="mobile-menu-content">
+                <!-- Logo -->
+                <div class="mobile-logo">
+                    <a href="{{ config.base_url }}" class="logo-link">
+                        <span class="logo-text">{{ config.title }}</span>
+                    </a>
+                </div>
+
+                <div class="mobile-nav-links">
+                    {% for item in menu %}
+                        {% if item.children %}
+                            <!-- Mobile Dropdown -->
+                            <div class="mobile-dropdown mobile-nav-item">
+                                <button class="mobile-nav-link mobile-dropdown-trigger">
+                                    <span>{{ item.name }}</span>
+                                    <svg class="mobile-dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="mobile-dropdown-content">
+                                    {% for child in item.children %}
+                                        <a href="{{ child.url | safe }}" class="mobile-dropdown-link">{{ child.name }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <a href="{{ item.url | safe }}" class="mobile-nav-item mobile-nav-link">{{ item.name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

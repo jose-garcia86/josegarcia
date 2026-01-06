@@ -1,0 +1,87 @@
+<div class="container">
+    {% set current_lang = lang | default(value=config.default_language) %} {% if
+    current_lang == "es" %} {% set section =
+    get_section(path="articles/featured/_index.es.md") %} {% else %} {% set
+    section = get_section(path="articles/featured/_index.md") %} {% endif %}
+
+    <header class="section-header">
+        <h1 class="section-title">{{section.title}}</h1>
+        <a href="{{section.permalink}}" class="view-all">
+            View all
+            <svg
+                class="arrow-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+            >
+                <path
+                    d="M5 12h14M12 5l7 7-7 7"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </a>
+    </header>
+    <!-- Featured Card -->
+    {% set featured_posts = section.pages | filter(attribute="extra.featured",
+    value=true) %} {% for post in featured_posts | slice(end=1) %}
+    <article class="featured-card">
+        <div class="card-image-wrapper">
+            <img
+                src="{{ post.permalink ~ post.extra.image }}"
+                alt="{{ post.title }}"
+                class="card-image"
+            />
+            <!-- <div class="card-badge">Featured</div> -->
+        </div>
+
+        <div class="card-content">
+            <div class="card-meta">
+                <!-- <span class="card-category">Design</span> -->
+                <time class="card-date"
+                    >{{ post.date | date(format="%B %d, %Y") }}</time
+                >
+            </div>
+
+            <h2 class="card-title">
+                <a href="{{ post.permalink }}">{{ post.title }}</a>
+            </h2>
+
+            {% if post.summary %}
+            <p class="card-description">{{ post.summary }}</p>
+            {% elif post.description %}
+            <p class="card-description">{{ post.description }}</p>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+
+    <!-- Additional Cards in a Grid -->
+    <div class="cards-grid">
+        {% for post in featured_posts | slice(start=1, end=4) %}
+        <article class="card">
+            <div class="card-image-wrapper">
+                <img
+                    src="{{ post.permalink ~ post.extra.image }}"
+                    alt="{{ post.title }}"
+                    class="card-image"
+                />
+            </div>
+
+            <div class="card-content">
+                <div class="card-meta">
+                    <!-- <span class="card-category">Development</span> -->
+                    <time class="card-date"
+                        >{{ post.date | date(format="%B %d, %Y") }}</time
+                    >
+                </div>
+
+                <h3 class="card-title">
+                    <a href="{{ post.permalink }}">{{ post.title }}</a>
+                </h3>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>

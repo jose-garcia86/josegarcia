@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="container">
+    <!-- Header -->
+        <header class="header">
+            <p class="intro-text">{{page.extra.intro | safe}}</p>
+        </header>
+        <!-- Main Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">{{page.title | safe}}</h1>
+                <p class="hero-subtitle">{{page.description | safe}}</p>
+            </div>
+        </section>
+        <!-- Work Section -->
+        <section class="section">
+            <h2 class="section-title">Work</h2>
+            <div class="section-content">
+                <p>
+                    {{ page.content | safe }}
+                </p>
+            </div>
+        </section>
+        <!-- Bio Section -->
+        <section class="section">
+            <h2 class="section-title">Bio</h2>
+            <div class="section-content bio-timeline">
+                <div class="timeline-item">
+                    <span class="year">{{page.extra.bioPeriod1 | safe}}</span>
+                    <span class="event">{{page.extra.bioWork1 | safe}}</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="year">{{page.extra.bioPeriod2 | safe}}</span>
+                    <span class="event">{{page.extra.bioWork2 | safe}}</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="year">{{page.extra.bioPeriod3 | safe}}</span>
+                    <span class="event">{{page.extra.bioWork3 | safe}}</span>
+                </div>
+            </div>
+        </section>
+        <!-- Interests Section -->
+        <section class="section">
+            <h2 class="section-title">I ♥</h2>
+            <div class="section-content">
+                <p class="interests">
+                    {{page.extra.interest | safe }}
+                </p>
+            </div>
+        </section>
+</div>
+{% endblock content %}
+
+
+
+        
+
+        
+
+        
+
+        

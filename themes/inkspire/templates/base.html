@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>
+            {%- if page.title -%} {{ page.title }} {%- elif section.title -%} {{
+            section.title }} {%- endif -%}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% block styles %}
+        <link rel="stylesheet" href="{{ get_url(path='css/styles.css') }}" />
+        {% endblock %}
+    </head>
+    <body>
+        {% include 'partials/header.html' %}
+        <main>{% block content %} {% endblock %}</main>
+        {% include 'partials/footer.html' %}
+
+        <script src="{{ get_url(path='js/main.js') }}"></script>
+    </body>
+</html>
