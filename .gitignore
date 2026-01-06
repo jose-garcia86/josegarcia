@@ -1,9 +1,3 @@
-# Hugo default output directory
-**/public
-
-# Hugo binaries for local testing
-bin
-
 # NPM
 **/node_modules
 
