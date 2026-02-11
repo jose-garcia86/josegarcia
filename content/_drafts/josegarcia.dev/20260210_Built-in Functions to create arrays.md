@@ -35,3 +35,18 @@ As we can see, the `np.zeros()` function creates by default an array with **dty
 Similarly, we can create an ndarray with a specified shape that is full of *ones*. We can do this by using the `np.ones()` function. Just like the `np.zeros()` function, the `np.ones()` function takes as an argument the shape of the ndarray you want to make. Let’s see an example:
 
 ## Example 2. Create a Numpy array of ones.
+
+```python
+# We create a 3 x 2 ndarray full of ones
+X = np.ones((3,2))
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print information about X
+print('X has dimensions:', X.shape)
+print('X is an object of type:', type(X))
+print('X
+```
