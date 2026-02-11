@@ -29,3 +29,9 @@ X has dimensions: (3, 4)
 X is an object of type: class 'numpy.ndarray'
 The elements in X are of type: float64
 ```
+
+As we can see, the `np.zeros()` function creates by default an array with **dtype** float64. If desired, the data type can be changed by using the keyword `dtype` .
+
+Similarly, we can create an ndarray with a specified shape that is full of *ones*. We can do this by using the `np.ones()` function. Just like the `np.zeros()` function, the `np.ones()` function takes as an argument the shape of the ndarray you want to make. Let’s see an example:
+
+## Example 2. Create a Numpy array of ones.
