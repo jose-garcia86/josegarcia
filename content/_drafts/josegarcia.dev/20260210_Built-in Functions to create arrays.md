@@ -146,10 +146,40 @@ X =
 [ 0 0 0 50]]
 ```
 
-# numpy.arrange
+# numpy.arange
 
 Syntax:
 
 ```python
-numpy
+numpy.arange([start, ]stop, [step, ] dtype=None)
+```
+
+It returns evenly spaced values within a given interval. Details about the optional arguments are available [here(opens in a new tab)](https://numpy.org/doc/stable/reference/generated/numpy.arange.html).
+
+Numpy also allows you to create ndarrays that have evenly spaced values within a given interval. Numpy’s `np.arange()`function is very versatile and can be used with either one, two or three arguments. Below we will see examples of each case and how they are used to create different kinds of ndarrays.
+
+Let’s start by using `np.arange()` with only one argument. When used with only one argument, `np.arange(N)` will create a rank 1 ndarray with consecutive integers between `0` and `N - 1`. Therefore, notice that if I want an array to have integers between 0 and 9, I have to use N = 10, **Not** N = 9, as in the example below.
+
+## Example 5. Create a Numpy array of evenly spaced values in a given range, using `arange(stop_val)`
+
+```python
+# We create a rank 1 ndarray that has a sequential integers from 0 to 9
+X = np.arange(10)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+# Output
+x = [0 1 2 3 4 5 6 7 8 9]
+
+x has dimensions: (10,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
 ```
