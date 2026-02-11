@@ -48,5 +48,5 @@ print()
 # We print information about X
 print('X has dimensions:', X.shape)
 print('X is an object of type:', type(X))
-print('X
+print('The elements of
 ```
