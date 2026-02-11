@@ -1,0 +1,21 @@
+# AI for Good Framework
+
+First of all, I would say that there is no official or universal accepted framework for approaching AI for Good projects, but the framework we will be talking about here is based on a collection of best practices.
+
+In general, AI for Good projects, like pretty much any project, happen in a set of stages or phases. We have broken up the project lifecycle into four phases:
+
+- **Explore Phase**: where you are connected with stakeholders, defining the problems that you want to work on, evaluating feasibility, and determining whether AI can add value as part of the solution. If the exploration of the project looks promising, you can move into the design phase.
+- **Design Phase**: where you are prototyping the solution, developing our model strategy, investigating the data further and thinking about how we ensure data privacy, as well as how potential users will be interacting with those systems. It is possible that within the **design phase** you realize that some of your assumptions coming out from the **explore phase** aren’t holding up, and you will need to go back and explore further, have more discussions with stackeholders and maybe iterate on your problem statement. This can be an iterative process and sometimes its necessary to go back to the previous phase if you discover that you don’t have what you need to complete the work in the phase you’re in.
+- **Implement Phase**: Once you have set up the design, you will move on into the **implement phase**, where you do what it is known as the *productionizing* your models. An this really just means taking what you have been designing in some sort of testing environment and getting it ready for deployment and integration with your user interface. Finally in this phase you will also test your system for performance and usability. In this phase is also possible that through your work in the implement phase some aspects of your desing aren’t goint to work out, so you need to go back to the design phase.
+- **Deployment**: Once you’ve got implementation you’re happy with, you’re ready to deploy. Now of course there is a lot more to deployment in terms of technical details than just pressing a button and going live.
+- **Evaluate**: After your system is deployed, it’s time to evaluate the impact. Communicate your findings and then decide what to do next. At this point a number of things might have happened. Most commonly, perhaps, you’ll have discovered through deploying your system that there’s something you would like to tweak about the implementation. So you go back to the implement phase and relaunch a new version of your product.
+
+[[ai-for-good-framework.jpg|1102]]
+
+To be transparent, a lot of time, you’ll work out that you’re not able to complete a project successfully at all, and this is nothing to be ashamed about. The majority of projects focused on social good don’t have a demonstrable impact on the communities that they are trying to help. Most of the time, this kind of projects would not be able to demonstrate a very significant improvement in that product by using AI. So if the majority of AI projects don’t work, and the majority of **for-good** projects don’t work, you should not be surprised that when you try to combine these two very difficult areas, the majority of ideas, no matter how well-intentioned, are not going to work out and have success.
+
+Being able to recognise that you are not likely to reach a successful outcome is actually one of the most important leadership and design skills you can develop.
+
+From experience I can say that when working on a real project, things can seem a lot more chaotic than this relative simple diagram might seem to indicate. But what I can also say is that if you keep this framework in mind at every stage of the project, then you’ll be much more likely to arrive to a successful outcome, or at the very least, realize what you’re getting off track and then be able to get up and get back on track as effectively as possible. 
+
+ 

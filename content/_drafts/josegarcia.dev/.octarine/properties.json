@@ -38,5 +38,10 @@
     "name": "Author",
     "type": "string",
     "options": null
+  },
+  {
+    "name": "oct.related",
+    "type": "list",
+    "options": null
   }
 ]
