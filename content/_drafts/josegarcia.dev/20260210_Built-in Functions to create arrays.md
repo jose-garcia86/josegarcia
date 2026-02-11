@@ -76,5 +76,54 @@ print()
 print('X = \n', X)
 print()
 
-# We print information
+# We print information about X
+print('X has dimensions:', X.shape)
+print('X is an object of type:', type(X))
+print('The elements in X are of type:', X.dtype) 
+
+# Output
+X =
+[[5 5 5]
+[5 5 5]]
+
+X has dimensions: (2, 3)
+X is an object of type: class 'numpy.ndarray'
+The elements in X are of type: int64
 ```
+
+The `np.full()` function creates by default an array with the same data type as the constant value used to fill in the array. If desired, the data type can be changed by using the keyword `dtype`.
+
+As you will learn later, a fundamental array in Linear Algebra is the **Identity Matrix**. An Identity Matrix is a square matrix that has only **1s** in its main diagonal and zeros everywhere else. The function `np.eye(N)` creates a square **N x N** ndarray corresponding to the identity matrix. Since all Identity Matrices are square, the `np.eye()` function only takes a single integer as an argument. Let’s an example:
+
+## Example 4a. Create a Numpy array of an Identity Matrix
+
+```python
+# We create a 5 x 5 Identity Matrix
+X = np.eye(5)
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print information about X
+print('X has dimensions:', X.shape)
+print('X is an object of type:', type(X))
+print('The elements in X are of type:', X.dtype)  
+
+# Output
+X =
+[[ 1. 0. 0. 0. 0.]
+[ 0. 1. 0. 0. 0.]
+[ 0. 0. 1. 0. 0.]
+[ 0. 0. 0. 1. 0.]
+[ 0. 0. 0. 0. 1.]]
+
+X has dimensions: (5, 5)
+X is an object of type: class 'numpy.ndarray'
+The elements in X are of type: float64
+```
+
+As we can see, the `np.eye()` function also creates by default an array with dtype float64. If desired, the data type can be changed by using the keyword `dtype`. You will learn all about Identity Matrices and their use in the Linear Algebra section of this course. We can also create diagonal matrices by using `np.diag()` function. A **Diagonal Matrix** is a square matrix that only has values in its diagonal. The `np.diag()` function creates an ndarray corresponding to a diagonal matrix, as shown in the example below:
+
+## Example 4b. Create a Numpy array of constants
