@@ -48,5 +48,33 @@ print()
 # We print information about X
 print('X has dimensions:', X.shape)
 print('X is an object of type:', type(X))
-print('The elements of
+print('The elements in X are of type:', X.dtype)
+
+# Output
+X =
+[[ 1. 1.]
+[ 1. 1.]
+[ 1. 1.]]
+
+X has dimensions: (3, 2)
+X is an object of type: class 'numpy.ndarray'
+The elements in X are of type: float64
+```
+
+As we can see, the `np.ones()` function also creates by default an array with **dtype** float64. If desired, the data type can be changed by using the keyword `dtype`.
+
+We can also create an ndarray with a specified shape that is full of any number we want. We can do this by using the `np.full` function. The `np.full(shape, constant value)` function takes two arguments. The first argument is the `shape` of the ndarray you want to make and the second is the `constant value` you want to populate the array with. Let’s see an example:
+
+## Example 3. Create a Numpy array of constants
+
+```python
+# We create a 2x3 ndarray full of fives.
+X = np.full((2,3), 5)
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print information
 ```
