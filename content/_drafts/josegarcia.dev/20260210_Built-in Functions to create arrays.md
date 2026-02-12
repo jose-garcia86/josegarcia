@@ -303,7 +303,7 @@ x is an object of type: class 'numpy.ndarray'
 The elements in x are of type: float64
 ```
 
-As we can see, because we have excluded the endpoint, the spacing between values had to change in order to fit 10 evenly spaced numbers in the given interval. 
+As we can see, because we have excluded the endpoint, the spacing between values had to change in order to fit 10 evenly spaced numbers in the given interval.
 
 # numpy.reshape - This is a Function.
 
@@ -325,5 +325,40 @@ x = np.arange(20)
 
 # We print x
 print()
-print('Original
+print('Original x = ', x)
+print()
+
+# We reshape x into a 4 x 5 ndarray
+x = np.reshape(x, (4,5))
+
+# We print the reshaped x
+print()
+print('Reshaped x = \n', x)
+print()
+
+# We print information about the reshaped x
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+# Output
+Original x = [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
+
+Reshaped x =
+[[ 0 1 2 3 4]
+[ 5 6 7 8 9]
+[10 11 12 13 14]
+[15 16 17 18 19]]
+
+x has dimensions: (4, 5)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
+```
+
+# numpy.ndarray.reshaep - This one is a Method.
+
+Syntax:
+
+```python
+ndarray
 ```
