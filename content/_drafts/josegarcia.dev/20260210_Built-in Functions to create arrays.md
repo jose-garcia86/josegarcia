@@ -315,4 +315,15 @@ numpy.reshape(array, newshape, order='C')[source]
 
 It gives a new shape to an array without changing its data. More details about the arguments are available [here(opens in a new tab)](https://numpy.org/doc/stable/reference/generated/numpy.reshape.html#numpy.reshape).
 
-So far, we have only used the built-in function `np.arange()` and `np.linspace()` to create rank 1 ndarrays. However, we can use these functions to create rank 2 ndarrays of any shape by combining them with the `np.reshape()
+So far, we have only used the built-in function `np.arange()` and `np.linspace()` to create rank 1 ndarrays. However, we can use these functions to create rank 2 ndarrays of any shape by combining them with the `np.reshape()` function. The `np.reshape(ndarray, new_shape)` function converts the given `ndarray` into the specified `new_shape` . It is important to note that the `new_shape` should be compatible with the number of elements in the given `ndarray`. For example, you can convert a rank 1 ndarray with 6 elements, into a 3 × 2 rank 2 ndarray, or a 2 × 3 rank 2 ndarray, since both of these rank 2 arrays will have a total of 6 elements. However, you can’t reshape the rank 1 ndarray with 6 elements into a 3 × 3 rank 2 ndarray, since this rank 2 array will have 9 elements, which is greater that the number of elements in the original ndarray. Let’s see some examples:
+
+## Example 10. Create a Numpy array by feeding the output of `arange()` function as an argument to the `reshape()`function.
+
+```python
+# We create a rank 1 ndarray with sequential integers from 0 to 19
+x = np.arange(20)
+
+# We print x
+print()
+print('Original
+```
