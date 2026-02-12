@@ -360,5 +360,40 @@ The elements in x are of type: int64
 Syntax:
 
 ```python
-ndarray
+ndarray.reshape(shape, order='C')
 ```
+
+It returns an array containing the same data with a new shape. More details about the arguments are available [here(opens in a new tab)](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.reshape.html#numpy.ndarray.reshape).
+
+One greate feature about NumPy, is that some functions can also be applied as methods. This allows us to apply different functions in a sequence in just one line of code. `ndarray` methods are similar to ndarray attributes in that they are both applied using *dot* notation `.` . Let’s see how we can accomplish the same result as in the above example, but in just one line of code:
+
+## Example 11. Create a Numpy array by calling the `reshape()` function from the output of `arange()` function.
+
+```python
+# We create a rank 1 ndarray with sequential integers from 0 to 19 and reshape it to a 4 x 5
+# array
+Y = np.arange(0, 20).reshape(4,5)
+
+# We print Y
+print()
+print('Y = \n', Y)
+print()
+
+# We print information about Y
+print('Y has dimensions:', Y.shape)
+print('Y is an object of type:', type(Y))
+print('The elements in Y are of type:', Y.dtype) 
+
+# Output
+Y =
+[[ 0 1 2 3 4]
+[ 5 6 7 8 9]
+[10 11 12 13 14]
+[15 16 17 18 19]]
+
+Y has dimensions: (4, 5)
+Y is an object of type: class 'numpy.ndarray'
+The elements in Y are of type: int64
+```
+
+As we can see, we get the exact same result as before. Notice that when we use `reshape()` as a method, it’s applied as `ndarray.reshape(new_shape)`. This converts the `ndarray` into the specified shape `new_shape`. As before,
