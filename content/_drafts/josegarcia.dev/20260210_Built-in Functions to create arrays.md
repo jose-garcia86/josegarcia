@@ -268,6 +268,51 @@ print('x has dimensions:', x.shape)
 print('x is an object of type:', type(x))
 print('The elements in x are of type:', x.dtype)
 
+# Output
 x = [ 0. 2.77777778 5.55555556 8.33333333 11.11111111
 13.88888889 16.66666667 19.44444444 22.22222222 25. ]
+
+x has dimensions: (10,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: float64
 ```
+
+As we can see from the above example, the function `np.linspace(0, 25, 10)` returns an ndarray with `10` evenly spaced numbers in the closed interval `[0, 25]`. We can also see that both the start and end points, `0` and `25` in this case, are included. However, you can let the endpoint of the interval be excluded (just like in the `np.arange()` function) by setting the keyword `endpoint = False` in the `np.linspace()` function. Let’s create the same `x` ndarray we created above but now with the endpoint excluded:
+
+## Example 9. Create a NumPy array using `linspace(start, stop, n)`, with `stop` excluded.
+
+```python
+# We create a rank 1 ndarray that has 10 integers evenly spaced between 0 and 25, with 25 excluded
+
+x = np.linspace(0, 25, 10, endpoint=False)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+x = [ 0. 2.5 5. 7.5 10. 12.5 15. 17.5 20. 22.5]
+
+x has dimensions: (10,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: float64
+```
+
+As we can see, because we have excluded the endpoint, the spacing between values had to change in order to fit 10 evenly spaced numbers in the given interval. 
+
+# numpy.reshape - This is a Function.
+
+Syntax:
+
+```python
+numpy.reshape(array, newshape, order='C')[source]
+```
+
+It gives a new shape to an array without changing its data. More details about the arguments are available [here(opens in a new tab)](https://numpy.org/doc/stable/reference/generated/numpy.reshape.html#numpy.reshape).
+
+So far, we have only used the built-in function `np.arange()` and `np.linspace()` to create rank 1 ndarrays. However, we can use these functions to create rank 2 ndarrays of any shape by combining them with the `np.reshape()
