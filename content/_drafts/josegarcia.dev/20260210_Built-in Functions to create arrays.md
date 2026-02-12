@@ -240,4 +240,34 @@ The elements in x are of type: int64
 
 We can see that `x` has sequential integers between 1 and 13 but the difference between all adjacent values is 3.
 
-# 
+# numpy.linspace
+
+Sintax:
+
+```python
+numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)
+```
+
+It returns `num` evenly spaced values calculated over the interval `[start, stop]`. Details about the optional arguments are available [here(opens in a new tab)](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html).
+
+Even though the `np.arange()` function allows for non-integer steps, such as 0.3, the output is usually inconsistent, due to the finite floating point precision. For this reason, in the cases where non-integer steps are required, it is usually better to use the function `np.linspace()`. The `np.linspace(start, stop, N)` function returns `N` evenly spaced numbers over the *closed* interval `[start, stop]`. This means that both the `start` and the `stop` values are included. We should also note the `np.linspace()` function needs to be called with at least two arguments in the form `np.linespace(start, stop)`. In this case, the default number of elements in the specified interval will be *N= 50*. The reason `np.linspace()` works better that the `np.arange()` function, is that `np.linspace()` uses the number of elements we want in a particular interval, instead of the step between values. Let’s see some examples:
+
+## Example 8. Create a NumPy array using `linspace(start, stop, n)`, with `stop`inclusive.
+
+```python
+# We create a rank 1 ndarray that has 10 integers evenly spaced between 0 and 25.
+x = np.linspace(0, 25, 10)
+
+# We print the ndarray
+print()
+print('x = \n', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype)
+
+x = [ 0. 2.77777778 5.55555556 8.33333333 11.11111111
+13.88888889 16.66666667 19.44444444 22.22222222 25. ]
+```
