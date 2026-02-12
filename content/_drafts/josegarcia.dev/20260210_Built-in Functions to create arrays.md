@@ -396,4 +396,4 @@ Y is an object of type: class 'numpy.ndarray'
 The elements in Y are of type: int64
 ```
 
-As we can see, we get the exact same result as before. Notice that when we use `reshape()` as a method, it’s applied as `ndarray.reshape(new_shape)`. This converts the `ndarray` into the specified shape `new_shape`. As before,
+As we can see, we get the exact same result as before. Notice that when we use `reshape()` as a method, it’s applied as `ndarray.reshape(new_shape)`. This converts the `ndarray` into the specified shape `new_shape`. As before, it is important to note that the `new_shape` should be compatible with the number of elements in `ndarray`. In the example above, the function `np.arange(20)` creates an ndarray and serves as the `ndarray` to be reshaped by the `reshape()` method. Therefore, when using `reshape()` as a method, we don’t need to pass the `ndarray` as an argument to the `reshape()`function, instead we only need to pass the `new_shape` argument.
