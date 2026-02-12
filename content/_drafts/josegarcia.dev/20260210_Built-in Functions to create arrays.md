@@ -183,3 +183,61 @@ x has dimensions: (10,)
 x is an object of type: class 'numpy.ndarray'
 The elements in x are of type: int64
 ```
+
+When used with two arguments, `np.arange(start, stop)` will create a rank 1 ndarray with evenly spaced values within the half-open interval `[start, stop)`. This means the evenly spaced numbers will include `start` but *exclude* `stop`. Lets’s see an example
+
+## Example 6. Create a NumPy array using `arange(start_val, stop_val)`
+
+```python
+# We create a rank 1 ndarray that has a sequential integers from 4 to 9.
+x = np.arange(4, 10)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+# Output
+x = [4 5 6 7 8 9]
+
+x has dimensions: (6,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
+```
+
+As we can see, the function `np.arange(4, 10)` generates a sequence of integers with 4 inclusive and 10 exclusive.
+
+Finally, when used with three arguments, `np.arange(start, stop, step)` will create a rank 1 ndarray with evenly spaced values within the half-open interval `[start, stop)` with `step` being the distance between two adjacent values. Let’s see an example:
+
+## Example 7. Create a NumPy array using `arange(start_val, stop_val, step_size)`
+
+```python
+# We create a rank 1 ndarray that has evenly spaced integers from 1 to 13 in steps of 3.
+x = np.arange(1, 14, 3)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+# Output
+x = [ 1 4 7 10 13]
+
+x has dimensions: (5,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
+```
+
+We can see that `x` has sequential integers between 1 and 13 but the difference between all adjacent values is 3.
+
+# 
