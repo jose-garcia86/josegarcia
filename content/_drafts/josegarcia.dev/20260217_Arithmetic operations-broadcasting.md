@@ -126,7 +126,7 @@ divide(X,Y) =
 
 We can also apply mathematical functions, such as `sqrt(x)`, to all elements of an ndarray at once.
 
-## Example 3.  Additional mathematical functions
+## Example 3. Additional mathematical functions
 
 ```python
 # We create a rank 1 ndarray
@@ -171,5 +171,13 @@ print()
 print('X = \n', X)
 print()
 
-print('Average of all elements ')
+print('Average of all elements in X:', X.mean())
+print('Average of all elements in the columns of X:', X.mean(axis=0))
+print('Average of all elements in the rows of X:', X.mean(axis=1))
+print()
+print('Sum of all elements in X:', X.sum())
+print('Sum of all elements in the colums of X:', X.sum(axis=0))
+print('Sum of all elements in the rows of X:', X.sum(axis=1))
+print()
+print('Standard')
 ```
