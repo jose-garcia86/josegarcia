@@ -179,5 +179,90 @@ print('Sum of all elements in X:', X.sum())
 print('Sum of all elements in the colums of X:', X.sum(axis=0))
 print('Sum of all elements in the rows of X:', X.sum(axis=1))
 print()
-print('Standard')
+print('Standard Deviation of all elements in X:', X.std())
+print('Standard Deviation of all elements in the columns of X:', X.std(axis=0))
+print('Standard Deviation of all elements in the rows of X:', X.std(axis=1))
+print()
+print('Median of all elements in X:', np.median())
+print('Median of all elements in the columns of X:', np.median(axis=0))
+print('Median of all elements in the rows of X:', np.median(axis=1))
+print()
+print('Maximum value of all elements in X:', np.max())
+print('Maximum value of all elements in the columns of X:', np.max(axis=0))
+print('Maximum value of all elements in the rows of X:', np.max(axis=1))
+print()
+print('Minimum value of all elements in X:', X.min())
+print('Minimum value of all elements in the columns of X:', X.min(axis=0))
+print('Minimum value of all elements in the rows of X:'. X.min(axis=1))
+
+# Output
+X =
+[[1 2]
+[3 4]]
+
+Average of all elements in X: 2.5
+Average of all elements in the columns of X: [ 2. 3.]
+Average of all elements in the rows of X: [ 1.5 3.5]
+
+Sum of all elements in X: 10
+Sum of all elements in the columns of X: [4 6]
+Sum of all elements in the rows of X: [3 7]
+
+Standard Deviation of all elements in X: 1.11803398875
+Standard Deviation of all elements in the columns of X: [ 1. 1.]
+Standard Deviation of all elements in the rows of X: [ 0.5 0.5]
+
+Median of all elements in X: 2.5
+Median of all elements in the columns of X: [ 2. 3.]
+Median of all elements in the rows of X: [ 1.5 3.5]
+
+Maximum value of all elements in X: 4
+Maximum value of all elements in the columns of X: [3 4]
+Maximum value of all elements in the rows of X: [2 4]
+
+Minimum value of all elements in X: 1
+Minimum value of all elements in the columns of X: [1 2]
+Minimum value of all elements in the rows of X: [1 3]
 ```
+
+Finally, let’s see how NumPy can add single numbers to all the elements of an ndarray without the use of complicated loops.
+
+## Example 5. Change value of all elements of an array
+
+```python
+# We create a 2 x 2 ndarray
+X = np.array([[1,2], [3,4]])
+
+# We print x
+print()
+print('X = \n', X)
+print()
+
+print('3 * X = \n', 3 * X)
+print()
+print('3 + X = \n', 3 + X)
+print()
+print('X - 3 = \n', X - 3)
+print('X / 3 = \n', X / 3)
+
+# Output
+X =
+[[1 2]
+[3 4]]
+
+3 * X =
+[[ 3 6]
+[ 9 12]]
+
+X - 3 =
+[[-2 -1]
+[ 0 1]]
+
+X / 3 =
+[[ 0.33333333 0.66666667]
+[ 1. 1.33333333]]
+```
+
+In the example above, NumPy is working behind the scenes to broadcast `3` along the ndarray so that they have the same shape. This allows us to add 3 to each element of `X` with just one line of code.
+
+Subject to certain constraints, NumPy can do the same for two ndarrays
