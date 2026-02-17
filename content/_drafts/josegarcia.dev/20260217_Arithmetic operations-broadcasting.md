@@ -20,5 +20,59 @@ print()
 print('y = ', y)
 print()
 
-# We perform basic element-wise operations using arith
+# We perfrom basic element-wise operations using arithmetic symbols and functions
+print('x + y =', x + y)
+print('add(x, y) =', np.add(x, y))
+print()
+print('subtract(x-y) =', np.subtract(x, y))
+print()
+print('x * y =', x * y)
+print('mipliply(x,y) = ', np.multiply(x, y))
+print()
+print('x / y =', x / y)
+print('divide(x,y) =', np.divide(x, y))
+
+# Output
+x = [1 2 3 4]
+
+y = [ 5.5 6.5 7.5 8.5]
+
+x + y = [ 6.5 8.5 10.5 12.5]
+add(x,y) = [ 6.5 8.5 10.5 12.5]
+
+x - y = [-4.5 -4.5 -4.5 -4.5]
+subtract(x,y) = [-4.5 -4.5 -4.5 -4.5]
+
+x * y = [ 5.5 13. 22.5 34. ]
+multiply(x,y) = [ 5.5 13. 22.5 34. ]
+
+x / y = [ 0.18181818 0.30769231 0.4 0.47058824]
+divide(x,y) = [ 0.18181818 0.30769231 0.4 0.47058824]
+```
+
+We can also perform the same element-wise arithmetic operations on rank 2 ndarrays. Again, remember that in order to do these operations the shapes of the ndarray being operated on, must have the same shape or be broadcastable.
+
+## Example 2. Element-wise arithmetic operations on a 2-D array (Same shape)
+
+```python
+# We create two rank 2 ndarrays
+X = np.array([1, 2, 3, 4]).reshape(2, 2)
+Y = np.array([5.5, 6.5, 7.5, 8.5]).reshape(2, 2)
+
+# We print X
+print()
+print('X = \n', X)
+
+# We print Y
+print()
+print('Y = \n', Y)
+print()
+
+# We perform basic element-wise operations using arithmetic symbols and functions
+print('X + Y = \n', X + Y)
+print()
+print('add(X,Y) = \n', np.add(X,Y))
+print()
+print('X - Y = \n', X - Y)
+
 ```
