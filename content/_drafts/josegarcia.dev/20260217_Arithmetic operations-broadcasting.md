@@ -74,5 +74,52 @@ print()
 print('add(X,Y) = \n', np.add(X,Y))
 print()
 print('X - Y = \n', X - Y)
+print('subtract(X,Y) = \n', np.subtract(X,Y))
+print()
+print('X * Y = \n', X * Y)
+print('multiply(X,Y) = \n', np.multiply(X,Y))
+print()
+print('X / Y = \n', X / Y)
+print('divide(X,Y) = \n', np.divide(X,Y))
 
+# Output
+X =
+[[1 2]
+[3 4]]
+
+Y =
+[[ 5.5 6.5]
+[ 7.5 8.5]]
+
+X + Y =
+[[ 6.5 8.5]
+[ 10.5 12.5]]
+
+add(X,Y) =
+[[ 6.5 8.5]
+[ 10.5 12.5]]
+
+X - Y =
+[[-4.5 -4.5]
+[-4.5 -4.5]]
+
+subtract(X,Y) =
+[[-4.5 -4.5]
+[-4.5 -4.5]]
+
+X * Y =
+[[ 5.5 13. ]
+[ 22.5 34. ]]
+
+multiply(X,Y) =
+[[ 5.5 13. ]
+[ 22.5 34. ]]
+
+X / Y =
+[[ 0.18181818 0.30769231]
+[ 0.4 0.47058824]]
+
+divide(X,Y) =
+[[ 0.18181818 0.30769231]
+[ 0.4 0.47058824]]
 ```
