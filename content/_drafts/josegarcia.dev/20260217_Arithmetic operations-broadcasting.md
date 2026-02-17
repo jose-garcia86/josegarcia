@@ -123,3 +123,53 @@ divide(X,Y) =
 [[ 0.18181818 0.30769231]
 [ 0.4 0.47058824]]
 ```
+
+We can also apply mathematical functions, such as `sqrt(x)`, to all elements of an ndarray at once.
+
+## Example 3.  Additional mathematical functions
+
+```python
+# We create a rank 1 ndarray
+x = np.array([1, 2, 3, 4])
+
+# We print x
+print()
+print('x = ', x)
+
+# We apply different mathematical functions to all elements of x
+print()
+print('EXP(x) = ', np.exp(x))
+print()
+print('SQRT(x) = ', np.sqrt(x))
+print()
+print('POW(x,2) = ', np.pow(x, 2)) # We raise all elements to the power of 2
+
+# Output
+x = [1 2 3 4]
+
+EXP(x) = [ 2.71828183 7.3890561 20.08553692 54.59815003]
+
+SQRT(x) = [ 1. 1.41421356 1.73205081 2. ]
+
+POW(x,2) = [ 1 4 9 16]
+```
+
+Another great feature of NumPy is that it has a wide variety of statistical functions. Statistical functions provide us with statistical information about the elements in an ndarray.
+
+**Note** - Most of the statistical operations can be done using either a function or an equivalent method. For example, both [numpy.mean(opens in a new tab)](https://numpy.org/doc/stable/reference/generated/numpy.mean.html) function and [numpy.ndarray.mean(opens in a new tab)](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.mean.html#:~:text=method%20ndarray.,mean%20for%20full%20documentation.) method will return the arithmetic mean of the array elements along the given axis.
+
+Let’s see some examples showing a variety of statistical operations:
+
+## Example 4. Statistical functions
+
+```python
+# We create a 2 x 2 ndarray
+X = np.array([[1, 2], [3, 4]])
+
+# We print x
+print()
+print('X = \n', X)
+print()
+
+print('Average of all elements ')
+```
