@@ -296,5 +296,33 @@ print()
 
 print('x + Y = \n', x + Y)
 print()
-print()
+print('Z + Y = \n', Z + Y)
+
+# Output
+x = [1 2 3]
+
+Y =
+[[1 2 3]
+[4 5 6]
+[7 8 9]]
+
+Z =
+[[1]
+[2]
+[3]]
+
+x + Y =
+[[ 2 4 6]
+[ 5 7 9]
+[ 8 10 12]]
+
+Z + Y =
+[[ 2 3 4]
+[ 6 7 8]
+[10 11 12]]
 ```
+
+As before, NumPy is able to add 1 × 3 and 3 × 1 ndarrays to 3 × 3 ndarrays by broadcasting the smaller ndarrays along the big ndarray so that they have compatible shapes. In general, NumPy can do this provided that smaller ndarray, such as 1 × 3 ndarray in our example, can be expanded to the shape of the larger ndarray in such a way that the resulting broadcast is unambiguous.
+
+Make sure you check out the NumPy Documentation for more information on Broadcasting and its rules:
+[Broadcasting](https://numpy.org/devdocs/user/basics.broadcasting.html)
