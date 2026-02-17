@@ -20,5 +20,5 @@ print()
 print('y = ', y)
 print()
 
-# We perform basic element-wise 
+# We perform basic element-wise operations using arith
 ```
