@@ -265,4 +265,36 @@ X / 3 =
 
 In the example above, NumPy is working behind the scenes to broadcast `3` along the ndarray so that they have the same shape. This allows us to add 3 to each element of `X` with just one line of code.
 
-Subject to certain constraints, NumPy can do the same for two ndarrays
+Subject to certain constraints, NumPy can do the same for two ndarrays of different shapes, as we can see below.
+
+## Example 6. Arithmetic operations on 2-D arrays (Compatible shape)
+
+```python
+# We create a rank 1 ndaray
+x = np.array([1, 2, 3])
+
+# We create a 3 x 3 ndarray
+Y = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+# We create a 3 x 1 ndarray
+Z = np.array([1, 2, 3]).reshape(3, 1)
+
+# We print x
+print()
+print('x = ', x)
+print()
+
+# We print Y
+print()
+print('Y = \n', Y)
+print()
+
+# We print Z
+print()
+print('Z = \n', Z)
+print()
+
+print('x + Y = \n', x + Y)
+print()
+print()
+```
