@@ -28,5 +28,13 @@ print()
 # We access elements in Groceries using numerical indices:
 
 # we use multiple numerical indices
-print('How many eggs and apples do we need to byu')
+print('How many eggs and apples do we need to buy:\n', groceries[[0, 1]])
+print()
+
+# We use a negative numerical index
+print('Do we need bread:\n', grocesies[[-1]])
+print()
+
+# we use a single numerical index
+print('How many')
 ```
