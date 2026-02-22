@@ -36,5 +36,9 @@ print('Do we need bread:\n', grocesies[[-1]])
 print()
 
 # we use a single numerical index
-print('How many eggs do we need to buy:')
+print('How many eggs do we need to buy:', groceries[0])
+print()
+
+# we use iloc to access multiple numerical indices
+print('Do we need milk and)
 ```
