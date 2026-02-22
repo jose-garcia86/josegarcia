@@ -79,5 +79,58 @@ import numpy as np
 # We print fruits for reference
 print('Original grocery list of fruits:\n', fruits)
 
-# We apply different mathematical function
+# We apply different mathematical functions to all elements of fruits
+print()
+print('EXP(X) = \n', np.exp(fruits))
+print()
+print('SQRT(X) = \n', np.sqrt(fruits))
+print()
+print('POW(X, 2) = \n', np.power(fruits, 2)) # We raise all elements of fruits to the power of 2
+```
+
+#### Output
+
+| Original grocery list |  |
+| --- | --- |
+| apples | 10 |
+| oranges | 6 |
+| bananas | 3 |
+
+| EXP(X) = |  |
+| --- | --- |
+| apples | 22026.465795 |
+| oranges | 403.428793 |
+| bananas | 20.085537 |
+
+| SQRT(X) = |  |
+| --- | --- |
+| apples | 3.162278 |
+| oranges | 2.449490 |
+| bananas | 1.732051 |
+
+| POW(X,2) = |  |
+| --- | --- |
+| apples | 100 |
+| oranges | 36 |
+| bananas | 9 |
+
+Pandas also allows us to only apply arithmetic operations on selected items in our fruits grocery list. Let’s see some examples.
+
+## Example 3. Perform arithmetic operations on selected elements
+
+```python
+# We print fruits for reference
+print('Original grocery list of fruits:\n', fruits)
+print()
+
+# We add 2 only to the bananas
+print('Amount of bananas + 2 =', fruits['bananas'] + 2)
+print()
+
+# We subtract 2 from apples
+print('Amount of apples - 2=', fruits.iloc[0] - 2)
+print()
+
+# We multiply apples and oranges by 2
+print('We double the amount')
 ```
