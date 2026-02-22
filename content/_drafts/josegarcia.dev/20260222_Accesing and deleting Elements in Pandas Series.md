@@ -115,5 +115,67 @@ print('Original Grocery List:\n', groceries)
 print()
 print('We remove apples (out of place):\n', groceries.drop('apples))
 
-# We remove elements out
+# When we remove elements out of place the original Series remains intact. To see this
+# we display our grocery list again
+print()
+print('Grocery List after removing apples out of place:\n', groceries)
+
+# Output
+Original Grocery List:
+eggs           30
+apples         6
+milk           Yes
+bread          No
+dtype: object
+
+We remove apples (out of place):
+eggs           30
+milk           Yes
+bread          No
+dtype: object
+
+Grocery List after removing apples out of place:
+eggs           30
+apples         6
+milk           Yes
+bread          No
+dtype: object
 ```
+
+We can delete items from a Pandas Series in place by setting the keyword `inplace` to `True` in the `.drop()` method. Let’s see an example:
+
+## Example 4. Delete elements in-place using `drop()`
+
+```python
+# We display the origina grocery list
+print('Original Grocery List:\n', groceries)
+
+# We remove apples from our grocery list in place by setting the inplace keyword to True
+groceries.drop('apples', implace=True)
+
+# When we remove elements in place the original Series its modified. To see this
+# we display our grocery list again
+print()
+print('Groceriy List after removing apples in place:\n', groceries)
+
+# Output
+Original Grocery List:
+eggs           30
+apples         6
+milk           Yes
+bread          No
+dtype: object
+
+Grocery List after removing apples in place:
+eggs           30
+milk           Yes
+bread          No
+dtype: object
+```
+
+## Additional Reading - Pandas Series Documentation
+
+Refer to the list of available functions in the following two sections:
+
+- [Reindexing / selection / label manipulation(opens in a new tab)](https://pandas.pydata.org/pandas-docs/stable/reference/series.html#reindexing-selection-label-manipulation)
+- [Indexing, and iteration](https://pandas.pydata.org/pandas-docs/stable/reference/series.html#indexing-iteration)
