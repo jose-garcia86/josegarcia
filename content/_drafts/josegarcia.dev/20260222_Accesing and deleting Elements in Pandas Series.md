@@ -40,5 +40,76 @@ print('How many eggs do we need to buy:', groceries[0])
 print()
 
 # we use iloc to access multiple numerical indices
-print('Do we need milk and bread' )
+print('Do we need milk and bread:\n', groceries.iloc[[2, 3]])
+
+# Output
+How many eggs do we need to buy: 30
+
+Do we need milk and bread:
+milk          Yes
+bread         No
+dtype: object
+
+How many eggs and apples do we need to buy:
+eggs       30
+apples     6
+dtype: object
+
+How many eggs and apples do we need to buy:
+eggs       30
+apples     6
+dtype: object
+
+Do we need bread:
+bread     No
+dtype: object
+
+How many eggs do we need to buy: 30
+
+Do we need milk and bread:
+milk       Yes
+bread     No
+dtype: object
+```
+
+Pandas Series are also mutable like NumPy ndarrays, which means we can change the elements of a Pandas Series after it has been created. For example, let’s change the number of eggs we need to buy from our grocery list.
+
+## Example 2. Mutable elements using index labels
+
+```python
+# We display the original grocery list
+print('Original Grocery List:\n', groceries)
+
+# We change the number of eggs to 2
+groceries['eggs'] = 2
+
+# We display the changed grocery list
+print()
+print('Modified Grocery List:\n', groceries)
+
+# Output
+Original Grocery List:
+eggs           30
+apples         6
+milk           Yes
+bread          No
+dtype: object
+
+Modified Grocery List:
+eggs             2
+apples           6
+milk             Yes
+bread            No
+dtype: object
+```
+
+We can also delete items from a Pandas Series by using the `.drop()` method. The `Series.drop(label)` method removes the given `label` from the given `Series`. We should note that the `Series.drop(label)` method drops elements from the Series out-of-place, meaning that it doesn’t change the original Series being modified. Let’s see how this works:
+
+## Example 3. Delete elements out-of-place using `drop()`
+
+```python
+# We display the original grocery list
+print('Original Grocery List:\n', groceries)
+
+# We remove apples from our grocery list. the drop function removes 
 ```
