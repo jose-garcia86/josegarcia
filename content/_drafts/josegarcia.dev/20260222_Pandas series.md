@@ -34,3 +34,15 @@ milk            Yes
 bread           No
 dtype: object
 ```
+
+We see that Pandas Series are displayed with the indices in first column and the data in the second column. Notice that the data is not indexed 0 to 3 but rather it is indexed with the names of the food we put in, namely eggs, apples, etc… Also, notice that the data in our Pandas Series has both integers and strings.
+
+Just like NumPy ndarrays, Pandas Series have attributes that allow us to get information from the series in an easy way. Let’s see some of them:
+
+## Example 2 - Print attributes - shape, ndim, and size
+
+```python
+# We print some information about Groceries
+print('Groceries has shape:', groceries.shape)
+print('')
+```
