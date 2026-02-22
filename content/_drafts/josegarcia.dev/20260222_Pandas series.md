@@ -42,7 +42,4 @@ Just like NumPy ndarrays, Pandas Series have attributes that allow us to get inf
 ## Example 2 - Print attributes - shape, ndim, and size
 
 ```python
-# We print some information about Groceries
-print('Groceries has shape:', groceries.shape)
-print('')
 ```
