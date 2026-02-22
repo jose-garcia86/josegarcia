@@ -36,5 +36,5 @@ print('Do we need bread:\n', grocesies[[-1]])
 print()
 
 # we use a single numerical index
-print('How many')
+print('How many eggs do we need to buy:')
 ```
