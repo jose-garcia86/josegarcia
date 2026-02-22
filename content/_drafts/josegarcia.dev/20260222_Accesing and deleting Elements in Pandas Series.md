@@ -25,5 +25,8 @@ print()
 print('How many eggs and apples do we need to buy:\n', groceries.loc[['eggs', 'apples']])
 print()
 
-# We access elements 
+# We access elements in Groceries using numerical indices:
+
+# we use multiple numerical indices
+print('How many eggs and apples do we need to byu')
 ```
