@@ -132,5 +132,59 @@ print('Amount of apples - 2=', fruits.iloc[0] - 2)
 print()
 
 # We multiply apples and oranges by 2
-print('We double the amount')
+print('We double the amount of apples and oranges:\n', fruits[['apples', 'oranges']] * 2)
+print()
+
+# We divide apples and oranges by 2
+print('We half the amount of apples and oranges:\n', fruits.loc[['apples', 'oranges']] / 2)
 ```
+
+#### Output
+
+| Original grocery list |  |
+| --- | --- |
+| apples | 10 |
+| oranges | 6 |
+| bananas | 3 |
+
+| Amount of bananas + 2 |  |
+| --- | --- |
+| apples | 10 |
+| oranges | 6 |
+| bananas | 5 |
+
+| Amount of apples - 2 |  |
+| --- | --- |
+| apples | 8 |
+| oranges | 6 |
+| bananas | 3 |
+
+| We double the amount of apples and oranges: |  |
+| --- | --- |
+| apples | 20 |
+| oranges | 12 |
+
+| We half the amount of apples and oranges: |  |
+| --- | --- |
+| apples | 5.0 |
+| oranges | 3.0 |
+
+You can also apply arithmetic operations on Pandas Series of mixed data type provided that the arithmetic operation is defined for all data types in the Series, otherwise, you will get an error. Let’s see what happens when we multiply our grocery list by 2.
+
+## Example 4. Perform multiplication on a Series having integer and string elements
+
+```python
+# We create a Pandas Series that stores a grocery list
+groceries = pd.Series(data = [30, 6, 'Yes', 'No'], index = ['eggs', 'apples', 'milk', 'bread'])
+
+# We multiply our grocery list by 2
+groceries * 2
+```
+
+| eggs | 30 |
+| --- | --- |
+| apples | 6 |
+| milk | YesYes |
+| bread | NoNo |
+
+As we can see, in this case, since we multiplied by 2, Pandas doubles the data of each item including the strings. Pandas can do this because the multiplication operation `*` is defined both for numbers and strings. If you were to apply an operation that was valid for numbers but not strings, say for instance, `/` you will get an error. So when you have mixed data types in yo
