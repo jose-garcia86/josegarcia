@@ -111,5 +111,9 @@ We can also delete items from a Pandas Series by using the `.drop()` method. Th
 # We display the original grocery list
 print('Original Grocery List:\n', groceries)
 
-# We remove apples from our grocery list. the drop function removes 
+# We remove apples from our grocery list. The drop function removes elements out of place
+print()
+print('We remove apples (out of place):\n', groceries.drop('apples))
+
+# We remove elements out
 ```
