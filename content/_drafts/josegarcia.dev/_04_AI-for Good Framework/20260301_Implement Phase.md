@@ -9,6 +9,8 @@ For any project that you’re working in, to complete the implementation phase, 
 - Is your model performance acceptable?
 - Are end users able to successfully use your system?
 
-It’s possible you realize that there are problems with your model performance or usability of your system during the implementation phase, and you will need to return to the design phase and work out those problems. 
+It’s possible you realize that there are problems with your model performance or usability of your system during the implementation phase, and you will need to return to the design phase and work out those problems.
 
-In a particular project, is likely to involve a whole lot of technical challenges, related things like system uptime, or low latency predictions, or retraining time,
+In a particular project, is likely to involve a whole lot of technical challenges, related things like system uptime, or low latency predictions, or retraining time, and a lot of other factores about, I guess, practical real-world AI problems that typically aren’t part of more theoretical or academic-focused AI courses or the kind of labs that you’re probably used to. 
+
+The important thing for you to focus on in this program is the big picture about going from the problem definition that you identified in the exploration phase to the evaluation of the project on through the final phase. At the end, you should still be able to evaluate your project in terms of the problem definition that you initially set out to do. And so this is the evaluation of your results and the user experience of the people who are using and getting a benefit from the system that you’ve created.
