@@ -11,11 +11,13 @@ Finally, you’ll design the user experience for your project, and this can mean
 - Once we have investigated the data in more detail, we can design a model annotation strategy to add additional annotations as new training data so that we can update our models and automate more of the processiong much more quickly.
 - In Generall most of the costumers would prefer a mode that could be updated with new data quickly over a model that was absolutely state-of-the-art. This is because in many real world situations, a few extra human data labels is more important than hours and hours of extra training for a more highly converged model.
 
-Once that we have designed a system where we see that AI could likely provide an improved experience, we’re able to move into the implementation phase. But before that, there is another set of questions you should answer with your team before moving on to the next phase of development.  
+Once that we have designed a system where we see that AI could likely provide an improved experience, we’re able to move into the implementation phase. But before that, there is another set of questions you should answer with your team before moving on to the next phase of development.
 
 - First, regarding the data, how will you address the issues of imbalances, biases, privacy, or other concerns with your data?
 - Secondly, what kind of model will you implement and how will you measure its performance?
 - How will your design successfully address the problem that you defined in your explore phase?
 - Finally, how will end users interact with your system?
 
-It’s possible that in addressing these questions after you’re working in the design phase, you’ll recognise that you’ve run into issues like unanticipated challenges with the data, or how you might build a model using
+It’s possible that in addressing these questions after you’re working in the design phase, you’ll recognise that you’ve run into issues like unanticipated challenges with the data, or how you might build a model using that data to address the particular problem that you defined, or in designing the user experience. 
+
+In this case, you might discover that you need to return to the explore phase and get more information from stakeholders, investigate other data resources, or even re-examine the problem that you’re trying to address. 
