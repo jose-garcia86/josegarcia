@@ -91,4 +91,68 @@ print()
 print('The row index in shopping_carts is:', shopping_carts.index)
 print()
 print('The column index in shopping_carts is:', shopping_carts.columns)
+
+# Output
+shopping_carts has shape: (5, 2)
+shopping_carts has dimension: 2
+shopping_carts has a total of: 10 elements
+
+The data in shopping_carts is:
+[[ 500. 245.]
+[ 40. nan]
+[ 110. nan]
+[ 45. 25.]
+[ nan 55.]]
+
+The row index in shopping_carts is: Index(['bike', 'book', 'glasses', 'pants', 'watch'], dtype='object')
+
+The column index in shopping_carts is: Index(['Alice', 'Bob'], dtype='object')
 ```
+
+When creating the `shopping_carts` DataFrame we passed the entire dictionary to the `pd.DataFrame()` function. However, there might be cases when you are only interested in a subset of the data. Pandas allows us to select which data we want to put into our DataFrame by means of the keywords `columns` and `index`. Let’s see some examples:
+
+```python
+# We create a DataFrame that only has Bob's data
+bob_shopping_cart = pd.DataFrame(items, columns=['Bob'])
+
+# We display bob_shopping_cart
+bob_shopping_cart
+```
+
+|  | **Bob** |
+| --- | --- |
+| **bike** | 245 |
+| **pants** | 25 |
+| **watch** | 55 |
+
+## Example 4. Selecting specific rows of a DataFrame
+
+```python
+# We Create a DataFrame that only has selected items for both Alice and Bob
+sel_shopping_cart = pd.DataFrame(items, index=['pants', 'book'])
+
+# We display sel_shopping_cart
+sel_shopping_cart
+```
+
+|  | **Alice** | **Bob** |
+| --- | --- | --- |
+| **pants** | 45 | 25.0 |
+| **book** | 40 | NaN |
+
+## Example 5. Selecting specific columns of DataFrame
+
+```python
+# We create a DataFrame that only has selected items for Alice
+alice_sel_shopping_cart = pd.DataFrame(items, index=['glasses, 'bike'], columns=['Alice'])
+
+# We display alice_sel_shopping_cart
+alice_sel_shopping_cart
+```
+
+|  | **Alice** |
+| --- | --- |
+| **glasses** | 110 |
+| **bike** | 500 |
+
+You can also manually create a DataFrame from a dictionary of lists (arrays). The procedure is the same as before, we start by creating the dictionary and then passing
