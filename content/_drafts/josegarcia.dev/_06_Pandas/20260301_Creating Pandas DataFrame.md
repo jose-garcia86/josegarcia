@@ -155,4 +155,4 @@ alice_sel_shopping_cart
 | **glasses** | 110 |
 | **bike** | 500 |
 
-You can also manually create a DataFrame from a dictionary of lists (arrays). The procedure is the same as before, we start by creating the dictionary and then passing
+You can also manually create a DataFrame from a dictionary of lists (arrays). The procedure is the same as before, we start by creating the dictionary and then passing the dictionary to the `pd.DataFrame()` function. In this case, however, all the lists (arrays) in the dictionary must be of the same length. Let’s see an example.
