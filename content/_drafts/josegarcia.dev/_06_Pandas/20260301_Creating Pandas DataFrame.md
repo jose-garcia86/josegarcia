@@ -49,4 +49,46 @@ There are several things to notice here, as explained below:
 
 1. We see that DataFrames are displayed in tabular form, much like an Excel spreadsheet, with the labels of rows and columns in **bold**.
 2. Also, notice that the row labels of the DataFrame are built from the union of the index labels of the two Pandas Series we used to construct the dictionary. And the column labels of the DataFrame are taken from the *keys* of the dictionary.
-3. The last thing we want to point out is that we see some `NaN` values appear in the DataFrame. `NaN` sta
+3. The last thing we want to point out is that we see some `NaN` values appear in the DataFrame. `NaN` stands for *Not a Number*, and is Pandas way of indicating that it doesn’t have a value for that particular row and column index. For example, if we look at the column of Alice, we see that it has `NaN` in the watch index. You can see why this is the case by looking at the dictionary we created at the beginning. We clearly see that the dictionary has no item for Alice labeled watches. So whenever a DataFrame is created, if a particular column doesn’t have values for a particular row index, Pandas will put a `NaN` value there.
+4. If we were to feed this data into a machine learning algorithm we will have to remove these `NaN` values first. In a later lesson we will learn how to deal with `NaN` values and clean our data. For now, we will leave these values in our DataFrame.
+
+In the example above, we created a Pandas DataFrame from a dictionary of Pandas Series that had a clearly defined indexes. If we don’t provide index labels to the Pandas Series, Pandas will use numerical rows indexes when it creates the DataFrame. Let’s see an example:
+
+## Example 2. DataFrame assigns the numerical row indexes by default.
+
+```python
+# We create a dictionary of Pandas Series without indexes
+data = {'Alice': pd.Series([40, 110, 500, 45]), 'Bob': pd.Series([245, 25, 55])}
+
+# We create a DataFrame
+df = pd.DataFrame(data)
+
+# We display the DataFrame
+df
+```
+
+|  | **Alice** | **Bob** |
+| --- | --- | --- |
+| **0** | 40 | 245.0 |
+| **1** | 110 | 25.0 |
+| **2** | 500 | 55.0 |
+| **3** | 45 | NaN |
+
+We can see that Pandas indexes the rows of the DataFrame starting from 0, just like NumPy indexes ndarrays.
+
+Now, just like with Pandas Series we can also extract information from DataFrames using attributes. Let’s print some information from our `shopping_carts` DataFrame.
+
+## Example 3. Demonstrate a few attributes of DataFrame
+
+```python
+# We print some information about shopping_carts
+print('shopping_carts has shape:', shopping_carts.shape)
+print('shopping_carts has dimension:', shopping_carts.ndim)
+print('shopping_carts has a total of:', shopping_carts.size, 'elements')
+print()
+print('The data in shopping_carts is:\n', shopping_carts.values)
+print()
+print('The row index in shopping_carts is:', shopping_carts.index)
+print()
+print('The column index in shopping_carts is:', shopping_carts.columns)
+```
