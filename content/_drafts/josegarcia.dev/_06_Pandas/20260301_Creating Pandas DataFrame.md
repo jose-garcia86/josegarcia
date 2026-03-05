@@ -220,7 +220,7 @@ store_items
 | **0** | 20 | 30 | 35 | NaN |
 | **1** | 15 | 5 | 10 | 50.0 |
 
-Again, notice that since the `items2` dictionary we created doesn’t have label indices, Pandas automatically uses numerical row indexes when it creates the DataFrame. As before, we can put labels to the row index by using the `index` keyword in the `pd.DataFrame()` function. Let’s assume we are going to use this DataFrame to hold the number of items a particular store has in stock. So, we will label the row indices as **store 1**  and **store 2**.
+Again, notice that since the `items2` dictionary we created doesn’t have label indices, Pandas automatically uses numerical row indexes when it creates the DataFrame. As before, we can put labels to the row index by using the `index` keyword in the `pd.DataFrame()` function. Let’s assume we are going to use this DataFrame to hold the number of items a particular store has in stock. So, we will label the row indices as **store 1** and **store 2**.
 
 ## Example 9. Create a DataFrame using a list of dictionaries, and custom row-indexes (labels)
 
@@ -232,5 +232,16 @@ items2 = [{'bikes': 20, 'pants': 30, 'watches': 35},
 # We create a DataFrame and provide the row index
 store_items = pd.DataFrame(items2, index = ['store 1', 'store 2'])
 
-# We display
+# We display the DataFrame
+store_items
 ```
+
+|  | **bikes** | **pants** | **watches** | **glasses** |
+| --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | NaN |
+| **store 2** | 15 | 5 | 10 | 50.0 |
+
+### Additional Reading - Pandas Documentation
+
+1. Refer to the [Intro to data structures(opens in a new tab)](https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html#intro-to-data-structures) for an overview of both the data structures - Series and DataFrame.
+2. Refer to the **Attributes and underlying data** section in the [DataFrame documentation(opens in a new tab)](https://pandas.pydata.org/pandas-docs/stable/reference/frame.html#dataframe).
