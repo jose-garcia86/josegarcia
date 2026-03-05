@@ -91,5 +91,79 @@ Suppose now, that you opened a new store and you need to add the number of items
 
 ```python
 # We create a dictionary from a list of Python dictionaries that will contain the number of different items at the new store
-new_items = [{'bikes': 20}]
+new_items = [{'bikes': 20, 'pants': 30, 'watches': 35, 'glasses': 4}]
+
+# We create new DataFrame with the new_items and provide and index labeled store 3
+new_store = pd.DataFrame(new_items, index=['store 3'])
+
+# We display the items at the new store
+new_store
+```
+
+|  | **bikes** | **pants** | **watches** | **glasses** |
+| --- | --- | --- | --- | --- |
+| **store 3** | 20 | 30 | 35 | 4 |
+
+We now add this row to our `store_items` DataFrame by using the `pd.concat()` function.
+
+## Example 4 b. Append the row to the DataFrame
+
+```python
+# We append store 3 to our store_items DataFrame
+store_items = pd.concat([store_items, new_store])
+
+# We display the modified DataFrame
+store_items
+```
+
+|  | **bikes** | **pants** | **watches** | **glasses** | **shirts** | **suits** |
+| --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | NaN | 15.0 | 45.0 |
+| **store 2** | 15 | 5 | 10 | 50.0 | 2.0 | 7.0 |
+| **store 3** | 20 | 30 | 35 | 4.0 | NaN | NaN |
+
+Notice that by appending a new row to the DataFrame, the columns have been put in alphabetical order.
+
+We can also add new columns of our DataFrame by using only data from particular rows in particular columns. For example, suppose that you want to stock stores 2 and 3 with **new watches** and you want the quantity of the **new watches** to be the same as the watches already in stock for those stores. Let's see how we can do this:
+
+## Example 5. Add new column that has data from the existing columns
+
+```python
+# We add a new column using data from particular rows in the watches column
+store_items['new_watches'] = store_items['watches'][1:]
+
+# We display the modified DataFrame
+store_items
+```
+
+|  | **bikes** | **pants** | **watches** | **glasses** | **shirts** | **suits** | **new watches** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | NaN | 15.0 | 45.0 | NaN |
+| **store 2** | 15 | 5 | 10 | 50.0 | 2.0 | 7.0 | 10.0 |
+| **store 3** | 20 | 30 | 35 | 4.0 | NaN | NaN | 35.0 |
+
+It is also possible, to insert new columns into the DataFrames anywhere we want. The `dataframe.insert(loc, label, data)` method allows us to insert a new column in the `dataframe` at location `loc`, with the given column `label`, and given `data`. Let's add new column named **shoes** right before the **suits** column. Since **suits** has numerical index value 4 then we will use this value as `loc`. Let's see how this works:
+
+## Example 6. Add new column at a specific location
+
+```python
+# We insert a new column with label shoes right before the column with numerical index 4
+store_items.insert(4, 'shoes', [8, 5, 0])
+
+# we display the modified DataFrame
+store_items
+```
+
+|  | **bikes** | **pants** | **watches** | **glasses** | **shirts** | **shoes** | **suits** | **new watches** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | NaN | 15.0 | 8 | 45.0 | NaN |
+| **store 2** | 15 | 5 | 10 | 50.0 | 2.0 | 5 | 7.0 | 10.0 |
+| **store 3** | 20 | 30 | 35 | 4.0 | NaN | 0 | NaN | 35.0 |
+
+Just as we can add rows and columns we can also delete them. To delete rows and columns from our DataFrame we will use the `.pop()` and `.drop()` methods. The `.pop()` method only allows us to delete columns, while the `.drop()` method can be used to delete both rows and columns by use of the `axis` keyword. Let's see some examples:
+
+## Example 7. Delete one column from a DataFrame
+
+```python
+# We remove the new watches column
 ```
