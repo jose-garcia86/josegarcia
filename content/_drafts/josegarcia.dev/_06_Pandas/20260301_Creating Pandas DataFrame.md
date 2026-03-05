@@ -186,5 +186,51 @@ Notice that since `data` dictionary we created doesn’t have label indices, Pa
 data = {'Floats': [4.5, 8.2, 9.6],
         'Integers': [1, 2, 3]}
 
+# We create a DataFrame and provide the row index
+df = pd.DataFrame(data, index = ['label 1', 'label 2', 'label 3'])
+
+# We display the DataFrame
+df
+```
+
+|  | **Floats** | **Integers** |
+| --- | --- | --- |
+| **label 1** | 4.5 | 1 |
+| **label 2** | 8.2 | 2 |
+| **label 3** | 9.6 | 3 |
+
+The last method for manually creating Pandas DataFrame that we want to look at is by using a list of Python dictionaries. The procedure is the same as before, we start by creating the dictionary and then passing the dictionary to the `pd.DataFrame()` function.
+
+## Example 8. Create a DataFrame using a list of dictionaries
+
+```python
+# We create a list of Python dictionaries
+items2 = [{'bikes': 20, 'pants': 30, 'watches': 35},
+          {'watches': 10, 'glasses': 50, 'bikes': 15, 'pants': 5}]
+
 # We create a DataFrame
+store_items = pd.DataFrame(items2)
+
+# We display the DataFrame
+store_items
+```
+
+|  | **bikes** | **pants** | **watches** | **glasses** |
+| --- | --- | --- | --- | --- |
+| **0** | 20 | 30 | 35 | NaN |
+| **1** | 15 | 5 | 10 | 50.0 |
+
+Again, notice that since the `items2` dictionary we created doesn’t have label indices, Pandas automatically uses numerical row indexes when it creates the DataFrame. As before, we can put labels to the row index by using the `index` keyword in the `pd.DataFrame()` function. Let’s assume we are going to use this DataFrame to hold the number of items a particular store has in stock. So, we will label the row indices as **store 1**  and **store 2**.
+
+## Example 9. Create a DataFrame using a list of dictionaries, and custom row-indexes (labels)
+
+```python
+# We create a list of Python dictionaries
+items2 = [{'bikes': 20, 'pants': 30, 'watches': 35}, 
+          {'watches': 10, 'glasses': 50, 'bikes': 15, 'pants': 5}]
+
+# We create a DataFrame and provide the row index
+store_items = pd.DataFrame(items2, index = ['store 1', 'store 2'])
+
+# We display
 ```
