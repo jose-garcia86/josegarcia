@@ -156,3 +156,35 @@ alice_sel_shopping_cart
 | **bike** | 500 |
 
 You can also manually create a DataFrame from a dictionary of lists (arrays). The procedure is the same as before, we start by creating the dictionary and then passing the dictionary to the `pd.DataFrame()` function. In this case, however, all the lists (arrays) in the dictionary must be of the same length. Let’s see an example.
+
+## Example 6. Create a DataFrame using a dictionary of lists
+
+```python
+# We create a dictionary of lists (arrays)
+data = {'Floats': [4.5, 8.2, 9.6], 
+        'Integers': [1, 2, 3]}
+
+# We create a DataFrame
+df = pd.DataFrame(data)
+
+# We display the DataFrame
+df
+```
+
+|  | **Floats** | **Integers** |
+| --- | --- | --- |
+| **0** | 4.5 | 1 |
+| **1** | 8.2 | 2 |
+| **2** | 9.6 | 3 |
+
+Notice that since `data` dictionary we created doesn’t have label indices, Pandas automatically uses numerical row indexes when it creates the DataFrame. We can, however, put labels to the row index by using the `index` keyword in the `pd.DataFrame()` function. Let’s see an example
+
+## Example 7. Create a DataFrame using a dictionary of lists, and custom row-indexes (labels)
+
+```python
+# We create a dictionary of lists (arrays)
+data = {'Floats': [4.5, 8.2, 9.6],
+        'Integers': [1, 2, 3]}
+
+# We create a DataFrame
+```
