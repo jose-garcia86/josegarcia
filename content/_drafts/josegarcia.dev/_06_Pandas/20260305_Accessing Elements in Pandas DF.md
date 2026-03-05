@@ -166,4 +166,93 @@ Just as we can add rows and columns we can also delete them. To delete rows and 
 
 ```python
 # We remove the new watches column
+store_items.pop('new watches')
+
+# we display the modified DataFrame
+store_items
 ```
+
+|  | **bikes** | **pants** | **watches** | **glasses** | **shirts** | **shoes** | **suits** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | NaN | 15.0 | 8 | 45.0 |
+| **store 2** | 15 | 5 | 10 | 50.0 | 2.0 | 5 | 7.0 |
+| **store 3** | 20 | 30 | 35 | 4.0 | NaN | 0 | NaN |
+
+## Example 8. Delete multiple columns from a DataFrame
+
+```python
+# We remove the watches and shoes columns
+store_items = store_items.drop(['watches', 'shoes'], axis=1)
+
+# we display the modified DataFrame
+store_items
+```
+
+|  | **bikes** | **pants** | **glasses** | **shirts** | **suits** |
+| --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | NaN | 15.0 | 45.0 |
+| **store 2** | 15 | 5 | 50.0 | 2.0 | 7.0 |
+| **store 3** | 20 | 30 | 4.0 | NaN | NaN |
+
+## Example 9. Delete rows from a DataFrame
+
+```python
+# We remove the store 2 and store 1 rows
+store_items = store_items.drop(['store 2', 'store 1'], axis=0)
+
+# we display the modified DataFrame
+store_items
+```
+
+|  | **bikes** | **pants** | **glasses** | **shirts** | **suits** |
+| --- | --- | --- | --- | --- | --- |
+| **store 3** | 20 | 30 | 4.0 | NaN | NaN |
+
+Sometimes we might need to change the row and column labels. Let’s change the **bikes** column label to **hats** using the `.rename()` method.
+
+## Example 10. Modify the column label
+
+```python
+# We change the column label bikes to hats
+store_items = store_items.rename(columns = {'bikes': 'hats'})
+
+# we display the modified DataFrame
+store_items
+```
+
+|  | **hats** | **pants** | **glasses** | **shirts** | **suits** |
+| --- | --- | --- | --- | --- | --- |
+| **store 3** | 20 | 30 | 4.0 | NaN | NaN |
+
+Now let's change the row label using the `.rename()` method again.
+
+## Example 11. Modify the row label
+
+```python
+# We change the row label from store 3 to last store
+store_items = store_items.rename(index = {'store 3': 'last store'})
+
+# we display the modified DataFrame
+store_items
+```
+
+|  | **hats** | **pants** | **glasses** | **shirts** | **suits** |
+| --- | --- | --- | --- | --- | --- |
+| **last store** | 20 | 30 | 4.0 | NaN | NaN |
+
+You can also change the index to be one of the columns in the DataFrame.
+
+## Example 12. Use existing column values as row-index
+
+```python
+# We change the row index to be the data in the pants column
+store_items = store_items.set_index('pants')
+
+# we display the modified DataFrame
+store_items
+```
+
+|  | **hats** | **glasses** | **shirts** | **suits** |
+| --- | --- | --- | --- | --- |
+| **pants** |  |  |  |  |
+| 30 | 20 | 4.0 | NaN | NaN |
