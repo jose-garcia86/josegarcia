@@ -148,4 +148,70 @@ store_items.fillna(0)
 | **store 2** | 15 | 5 | 10 | 2.0 | 5 | 7.0 | 50.0 |
 | **store 3** | 20 | 30 | 35 | 0.0 | 10 | 0.0 | 4.0 |
 
-We can also use the `.ffill()` method to replace `NaN` values with previous values in the DataFrame, this is known as *forward fillingorward filling*. When replacing `NaN` values with forward filling, we can use previous values taken from columns or rows. The `.ffill(axis)` will use the forward filling method to replace `NaN` values using the previous known value along the given `axis`. Let's see some examples:
+We can also use the `.ffill()` method to replace `NaN` values with previous values in the DataFrame, this is known as **forward filling**. When replacing `NaN` values with forward filling, we can use previous values taken from columns or rows. The `.ffill(axis)` will use the forward filling method to replace `NaN` values using the previous known value along the given `axis`. Let's see some examples:
+
+## Example 7. Forward fill NaN values *down* (axis=0) the dataframe
+
+```python
+# We replace NaN values with the previous value in the column
+store_items.ffill(axis=0)
+```
+
+|  | **bikes** | **pants** | **watches** | **shirts** | **shoes** | **suits** | **glasses** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | 15.0 | 8 | 45.0 | NaN |
+| **store 2** | 15 | 5 | 10 | 2.0 | 5 | 7.0 | 50.0 |
+| **store 3** | 20 | 30 | 35 | 2.0 | 10 | 7.0 | 4.0 |
+
+Notice that the two `NaN` values in **store 3** have been replaced with previous values in their columns. However, notice that the `NaN` value in **store 1** didn't get replaced. That's because there are no previous values in this column, since the `NaN` value is the first value in that column. However, if we do forward fill using the previous row values, this won't happen. Let's take a look:
+
+## Example 8. Forward fill NaN values *across* (axis=1) the dataframe
+
+```python
+# We replace NaN values with the previous value in the row
+store_items.ffill(axis=1)
+```
+
+|  | **bikes** | **pants** | **watches** | **shirts** | **shoes** | **suits** | **glasses** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20.0 | 30.0 | 35.0 | 15.0 | 8.0 | 45.0 | 45.0 |
+| **store 2** | 15.0 | 5.0 | 10.0 | 2.0 | 5.0 | 7.0 | 50.0 |
+| **store 3** | 20.0 | 30.0 | 35.0 | 35.0 | 10.0 | 10.0 | 4.0 |
+
+We see that in this case all the `NaN` values have been replaced with the previous row values.
+
+Similarly, you can choose to replace the `NaN` values with the values that go after them in the DataFrame, this is known as **backward filling**. The `.bfill(axis)` will use the backward filling method to replace `NaN` values using the next known value along the given `axis`. Just like with forward filling we can choose to use row or column values. Let's see some examples:
+
+## Example 9. Backward fill NaN values *down* (axis=0) the dataframe
+
+```python
+# We replace NaN values with the next value in the column
+store_items.bfill(axis=0)
+```
+
+|  | **bikes** | **pants** | **watches** | **shirts** | **shoes** | **suits** | **glasses** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | 15.0 | 8 | 45.0 | 50.0 |
+| **store 2** | 15 | 5 | 10 | 2.0 | 5 | 7.0 | 50.0 |
+| **store 3** | 20 | 30 | 35 | NaN | 10 | NaN | 4.0 |
+
+Notice that the `NaN` value in **store 1** has been replaced with the next value in its column. However, notice that the two `NaN`values in **store 3** didn't get replaced. That's because there are no next values in these columns, since these `NaN` values are the last values in those columns. However, if we do backward fill using the next row values, this won't happen. Let's take a look:
+
+## Example 10. Backward fill NaN values *across* (axis=1) the dataframe
+
+```python
+# We replace NaN values with the next value in the row
+store_items.bfill(axis=1)
+```
+
+|  | **bikes** | **pants** | **watches** | **shirts** | **shoes** | **suits** | **glasses** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20.0 | 30.0 | 35.0 | 15.0 | 8.0 | 45.0 | NaN |
+| **store 2** | 15.0 | 5.0 | 10.0 | 2.0 | 5.0 | 7.0 | 50.0 |
+| **store 3** | 20.0 | 30.0 | 35.0 | 10.0 | 10.0 | 4.0 | 4.0 |
+
+Notice that the `.fillna()`, `.ffill()`, and `.bfill()` methods replace (fill) `NaN` values *out of place* by default. This means that the original DataFrame remains unchanged unless explicitly modified. You can always replace the `NaN` values **in place** by setting the parameter `inplace=True` within these functions.
+
+We can also choose to replace `NaN` values by using different interpolation methods. For example, the `.interpolate(method='linear', axis)` method will use `linear` interpolation to replace `NaN` values using the values along the given `axis`. Let's see some examples:
+
+## Example 11. Interpolate (estimate) NaN values *down* (axis=0) the dataframe
