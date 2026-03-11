@@ -96,3 +96,56 @@ Number of non-NaN values in the columns of our DataFrame:
 | glasses | 2 |
 
 ## Eliminating NaN Values
+
+Now that we learned how to know if our dataset has any `NaN` values in it, the next step is to decide what to do with them. In general, we have two options, we can either *delete* or *replace* the `NaN` values. In the following examples, we will show you how to do both.
+
+We will start by learning how to **eliminate** rows or columns from our DataFrame that contain any `NaN` values. The `.dropna(axis)` method eliminates any *rows* with `NaN` values when `axis = 0` is used and will eliminate any *columns* with `NaN` values when `axis = 1` is used.
+
+**Tip**: Remember, you learned that you can read `axis = 0` as "**down**" and `axis = 1` as "**across**" the given Numpy ndarray or Pandas dataframe object.
+
+Let's see some examples.
+
+## Example 4. Drop rows having NaN values
+
+```python
+# We drop any rows with NaN values
+store_items.dropnan(axis=0)
+```
+
+|  | **bikes** | **pants** | **watches** | **shirts** | **shoes** | **suits** | **glasses** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 2** | 15 | 5 | 10 | 2.0 | 5 | 7.0 | 50.0 |
+
+## Example 5. Drop columns having NaN values
+
+```python
+# We drop any column with NaN values
+store_items.dropnan(axis=1)
+```
+
+|  | **bikes** | **pants** | **watches** | **shoes** |
+| --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | 8 |
+| **store 2** | 15 | 5 | 10 | 5 |
+| **store 3** | 20 | 30 | 35 | 10 |
+
+Notice that the `.dropna()` method eliminates (drops) the rows or columns with `NaN` values **out of place**. This means that the **original DataFrame is not modified**. You can always remove the desired rows or columns in place by setting the keyword `inplace = True` inside the `dropna()` function.
+
+## Substituting NaN Values
+
+Now, instead of eliminating `NaN` values, we can replace them with suitable values. We could choose for example to replace all `NaN` values with the value 0. We can do this by using the `.fillna()` method as shown below.
+
+## Example 6. Replace NaN with 0
+
+```python
+# We replace all NaN values with 0
+store_items.fillna(0)
+```
+
+|  | **bikes** | **pants** | **watches** | **shirts** | **shoes** | **suits** | **glasses** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **store 1** | 20 | 30 | 35 | 15.0 | 8 | 45.0 | 0.0 |
+| **store 2** | 15 | 5 | 10 | 2.0 | 5 | 7.0 | 50.0 |
+| **store 3** | 20 | 30 | 35 | 0.0 | 10 | 0.0 | 4.0 |
+
+We can also use the `.ffill()` method to replace `NaN` values with previous values in the DataFrame, this is known as *forward fillingorward filling*. When replacing `NaN` values with forward filling, we can use previous values taken from columns or rows. The `.ffill(axis)` will use the forward filling method to replace `NaN` values using the previous known value along the given `axis`. Let's see some examples:
