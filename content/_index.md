@@ -1,19 +1,19 @@
 +++
 title = "Jose Garcia"
-description = "Software Developer (Rust / Systems / Web / Tech Writer)"
+description = "Software Developer (Rust / Software / Engineer / System thinker)"
 template = "index.html"
 
 [extra]
-intro = "Hello, I'm a Rust developer and technical writer focused on fast, minimal, and durable software."
-bioWork1 = "Developed multiple startup concepts including CommentFlow, FleetFlow, and project management tools"
-bioPeriod1 = "2020 — 2023"
-bioWork2 = "Specialized in Rust development and system architecture"
-bioPeriod2 = "2023 — 2024"
-bioWork3 = "Writing technical blog posts about Rust, Zola, data engineering, and web development"
-bioPeriod3 = "2024 — Present"
-interests = ["Rust", "System Architecture", "Web Development", "Static Site Generators", "Zola", "Technical Writing", "Open Source", "Backend Systems", "API Design"]
+intro = "Engineering Lead. Systems programmer. Student of how software shapes thought."
+bioWork1 = "Academic work and research in engineering and computational modeling"
+bioPeriod1 = "Until 2015"
+bioWork2 = "Hands-on engineering and Python-based environmental/water modeling"
+bioPeriod2 = "2015 — 2023"
+bioWork3 = "Leading engineering teams, writing Rust for fun and performance, and maintaining this site as an independent notebook on tech philosophy."
+bioPeriod3 = "2023 — Present"
+interests = ["Rust", "System Programming", "Digital Minimalism", "Lean Software", "Software Philosophy", "Artificial Intelligence", "Environmental Modeling"]
 +++
 
-I'm a software developer with a passion for building robust systems and sharing knowledge through clear technical writing. I specialize in **Rust development**, focusing on performance, type safety, and pragmatic system design.
+I have spent my career at the intersection of physical engineering and computing. For years, I modeled environmental and water systems in Python -translating real-world physics into code. Today, I work as an engineering lead and write **Rust**. I made the switch partly for performance, and partly because it brought the fun back into programming. 
 
-With a background in full-stack engineering and a habit of breaking down complex concepts into first principles, I enjoy crafting both reliable software and in-depth technical guides. This site is my corner of the web for long-form essays in [Writing](/writing) and short field notes in [Microblog](/microblog).
+On this site, I step away from how-to tutirials to lookt at the bigger picture. I read research papers and reports to explore the philosophycal side of our craft. How tools shape our thinking, why lean software matters, and where human judgment fits in an age of AI.

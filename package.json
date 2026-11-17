@@ -2,6 +2,5 @@
   "name": "josegarcia-blog",
   "version": "1.0.0",
   "scripts": {
-    "build": "zola build"
   }
 }
