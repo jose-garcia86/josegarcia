@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-taxonomy">
+    <header class="page-header retro-panel">
+        <div class="panel-bar">
+            <span class="panel-index">TAXONOMY // TAGS</span>
+            <span class="panel-count">{{ terms | length }} TAGS</span>
+        </div>
+        <div class="page-header-body">
+            <h1 class="page-title">Tags</h1>
+            <p class="page-subtitle">Browse writing and notes by topic.</p>
+        </div>
+    </header>
+
+    <section class="retro-section">
+        <div class="tag-cloud">
+            {% for term in terms %}
+            <a href="{{ term.permalink }}" class="retro-badge">
+                #{{ term.name }} <span class="badge-count">({{ term.pages | length }})</span>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock content %}

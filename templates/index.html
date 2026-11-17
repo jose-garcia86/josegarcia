@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-about">
+    <!-- Hero / Identity Card (pierre.computer + mitchellh.com inspired) -->
+    <section class="retro-panel identity-card">
+        <div class="panel-bar">
+            <span class="panel-index">01 // PROFILE</span>
+            <span class="panel-status">
+                <span class="status-indicator"></span>
+                ONLINE
+            </span>
+        </div>
+        <div class="identity-body">
+            <div class="identity-header">
+                <h1 class="identity-title">{{ section.title }}</h1>
+                <p class="identity-role">{{ section.description }}</p>
+            </div>
+
+            {% if section.extra.intro %}
+            <p class="identity-intro">{{ section.extra.intro }}</p>
+            {% endif %}
+
+            <div class="prose about-prose">
+                {{ section.content | safe }}
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience / Timeline Section -->
+    <section class="retro-section">
+        <div class="section-heading-bar">
+            <h2 class="section-heading">02 // TIMELINE &amp; WORK</h2>
+            <span class="section-rule"></span>
+        </div>
+
+        <div class="timeline-table">
+            {% if section.extra.bioPeriod3 and section.extra.bioWork3 %}
+            <div class="timeline-row">
+                <span class="timeline-period">{{ section.extra.bioPeriod3 }}</span>
+                <span class="timeline-desc">{{ section.extra.bioWork3 }}</span>
+            </div>
+            {% endif %}
+            {% if section.extra.bioPeriod2 and section.extra.bioWork2 %}
+            <div class="timeline-row">
+                <span class="timeline-period">{{ section.extra.bioPeriod2 }}</span>
+                <span class="timeline-desc">{{ section.extra.bioWork2 }}</span>
+            </div>
+            {% endif %}
+            {% if section.extra.bioPeriod1 and section.extra.bioWork1 %}
+            <div class="timeline-row">
+                <span class="timeline-period">{{ section.extra.bioPeriod1 }}</span>
+                <span class="timeline-desc">{{ section.extra.bioWork1 }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Focus / Interests Section -->
+    {% if section.extra.interests %}
+    <section class="retro-section">
+        <div class="section-heading-bar">
+            <h2 class="section-heading">03 // FOCUS &amp; INTERESTS</h2>
+            <span class="section-rule"></span>
+        </div>
+        <div class="tag-cloud">
+            {% for item in section.extra.interests %}
+                <span class="retro-badge">{{ item }}</span>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Recent Writing Preview (mitchellh.com style) -->
+    {% set writing_section = get_section(path="writing/_index.md") %}
+    {% if writing_section.pages %}
+    <section class="retro-section">
+        <div class="section-heading-bar">
+            <h2 class="section-heading">04 // RECENT WRITING</h2>
+            <a href="/writing" class="section-action-link">ALL WRITING ({{ writing_section.pages | length }}) →</a>
+        </div>
+
+        <div class="post-index-list">
+            {% for post in writing_section.pages[:5] %}
+            <a href="{{ post.permalink }}" class="post-index-row">
+                <span class="post-index-title">{{ post.title }}</span>
+                <span class="post-index-leader"></span>
+                <time class="post-index-date" datetime="{{ post.date }}">{{ post.date | date(format="%Y-%m-%d") }}</time>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Recent Microblog Preview -->
+    {% set micro_section = get_section(path="microblog/_index.md") %}
+    {% if micro_section.pages %}
+    <section class="retro-section">
+        <div class="section-heading-bar">
+            <h2 class="section-heading">05 // LATEST MICROBLOG NOTES</h2>
+            <a href="/microblog" class="section-action-link">ALL NOTES ({{ micro_section.pages | length }}) →</a>
+        </div>
+
+        <div class="post-index-list">
+            {% for note in micro_section.pages[:3] %}
+            <a href="{{ note.permalink }}" class="post-index-row">
+                <span class="post-index-title">{{ note.title }}</span>
+                <span class="post-index-leader"></span>
+                <time class="post-index-date" datetime="{{ note.date }}">{{ note.date | date(format="%Y-%m-%d") }}</time>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-writing">
+    <header class="page-header retro-panel">
+        <div class="panel-bar">
+            <span class="panel-index">INDEX // WRITING</span>
+            <span class="panel-count">{{ section.pages | length }} ENTRIES</span>
+        </div>
+        <div class="page-header-body">
+            <h1 class="page-title">{{ section.title }}</h1>
+            {% if section.description %}
+            <p class="page-subtitle">{{ section.description }}</p>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Mitchell Hashimoto style clean date-aligned writing archive -->
+    <section class="retro-section">
+        <div class="post-index-list writing-archive">
+            {% for post in section.pages %}
+            <article class="writing-row">
+                <a href="{{ post.permalink }}" class="post-index-row">
+                    <span class="post-index-title">{{ post.title }}</span>
+                    <span class="post-index-leader"></span>
+                    <time class="post-index-date" datetime="{{ post.date }}">
+                        {{ post.date | date(format="%b %d, %Y") }}
+                    </time>
+                </a>
+                {% if post.description %}
+                <p class="writing-row-summary">{{ post.description }}</p>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock content %}

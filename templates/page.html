@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="single-post">
+    <!-- Top Article Metadata Panel -->
+    <header class="post-header retro-panel">
+        <div class="panel-bar">
+            {% if page.ancestors | length > 1 %}
+                {% set parent_sec = get_section(path=page.ancestors[1]) %}
+                <a href="{{ parent_sec.permalink }}" class="back-link">← {{ parent_sec.title | upper }}</a>
+            {% else %}
+                <a href="/writing" class="back-link">← WRITING</a>
+            {% endif %}
+            <div class="post-meta-bar">
+                {% if page.date %}
+                <time datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+                {% endif %}
+                {% if page.reading_time %}
+                <span class="meta-sep">·</span>
+                <span>{{ page.reading_time }} MIN READ</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="post-header-body">
+            <h1 class="post-title">{{ page.title }}</h1>
+            {% if page.description %}
+            <p class="post-subtitle">{{ page.description }}</p>
+            {% endif %}
+
+            {% if page.taxonomies.tags %}
+            <div class="post-tags">
+                {% for tag in page.taxonomies.tags %}
+                <a href="{{ get_taxonomy_url(kind='tags', term=tag) }}" class="retro-badge">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <div class="prose post-prose">
+        {{ page.content | safe }}
+    </div>
+
+    <!-- Previous / Next Navigation -->
+    {% if page.lower or page.higher %}
+    <nav class="post-pagination" aria-label="Article Navigation">
+        {% if page.lower %}
+        <a href="{{ page.lower.permalink }}" class="pagination-box prev">
+            <span class="pagination-label">← OLDER</span>
+            <span class="pagination-title">{{ page.lower.title }}</span>
+        </a>
+        {% endif %}
+        {% if page.higher %}
+        <a href="{{ page.higher.permalink }}" class="pagination-box next">
+            <span class="pagination-label">NEWER →</span>
+            <span class="pagination-title">{{ page.higher.title }}</span>
+        </a>
+        {% endif %}
+    </nav>
+    {% endif %}
+</article>
+{% endblock content %}

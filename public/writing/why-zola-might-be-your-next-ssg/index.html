@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Why Zola Might Be Your Next Static Site Generator — Jose Garcia</title>
+    <meta name="description" content="A Rust-powered static site generator that ships as a single binary with zero dependencies. Zola delivers blazing speed and built-in features without the complexity of managing plugins or build chains. If you value simplicity over ecosystem size, it&#39;s worth a look." />
+    
+    <link rel="alternate" type="application/atom+xml" title="Jose Garcia Atom Feed" href="https://josegarcia.dev/atom.xml" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://josegarcia.dev/css/styles.css" />
+    <script>
+        // Apply saved or system theme before first paint to prevent flash
+        (function () {
+            try {
+                var saved = localStorage.getItem("theme");
+                if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <div class="site-shell">
+        <!-- Top System Bar / Navigation -->
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="brand-link" aria-label="Jose Garcia Home">
+                    <span class="brand-dot" aria-hidden="true"></span>
+                    <span class="brand-name">Jose Garcia</span>
+                    <span class="brand-handle">~/josegarcia.dev</span>
+                </a>
+
+                <div class="header-controls">
+                    <nav class="site-nav" aria-label="Primary Navigation">
+                        
+                            
+                            
+                                
+                            
+                            <a href="/" class="nav-link">
+                                About
+                            </a>
+                        
+                            
+                            
+                                
+                                    
+                                
+                            
+                            <a href="/writing" class="nav-link active">
+                                Writing
+                            </a>
+                        
+                            
+                            
+                                
+                            
+                            <a href="/microblog" class="nav-link">
+                                Microblog
+                            </a>
+                        
+                    </nav>
+
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle light/dark mode">
+                        <span class="theme-toggle-label" data-theme-label>PAPER</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="site-main">
+            
+<article class="single-post">
+    <!-- Top Article Metadata Panel -->
+    <header class="post-header retro-panel">
+        <div class="panel-bar">
+            
+                
+                <a href="https://josegarcia.dev/writing/" class="back-link">← WRITING</a>
+            
+            <div class="post-meta-bar">
+                
+                <time datetime="2025-11-16">2025-11-16</time>
+                
+                
+                <span class="meta-sep">·</span>
+                <span>2 MIN READ</span>
+                
+            </div>
+        </div>
+
+        <div class="post-header-body">
+            <h1 class="post-title">Why Zola Might Be Your Next Static Site Generator</h1>
+            
+            <p class="post-subtitle">A Rust-powered static site generator that ships as a single binary with zero dependencies. Zola delivers blazing speed and built-in features without the complexity of managing plugins or build chains. If you value simplicity over ecosystem size, it&#39;s worth a look.</p>
+            
+
+            
+            <div class="post-tags">
+                
+                <a href="https://josegarcia.dev/tags/zola/" class="retro-badge">#Zola</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <div class="prose post-prose">
+        <p>If you're in the market for a static site generator, you've probably encountered the usual suspects: Hugo, Jekyll, Gatsby, Astro. But there's a compelling alternative that deserves your attention: Zola.</p>
+<h2 id="what-makes-zola-different">What Makes Zola Different</h2>
+<p>Zola is a static site generator built in Rust, which immediately gives it two advantages: blazing speed and zero dependencies. Unlike Jekyll (which requires Ruby) or Hugo (which needs Go), Zola is distributed as a single binary. Download it, and you're ready to build.</p>
+<p>This simplicity extends to the entire development experience. While other generators require you to manage plugin ecosystems and dependency chains, Zola ships with everything built-in: Sass compilation, syntax highlighting, image processing, and a powerful templating engine called Tera.</p>
+<h2 id="built-for-developers-who-value-speed">Built for Developers Who Value Speed</h2>
+<p>The performance is noticeable. Zola rebuilds sites almost instantaneously, making the local development experience smooth and interruption-free. The live reload is fast enough that you can see changes as you type.</p>
+<p>But speed isn't just about build times. Zola's approach to content organization is straightforward: sections, pages, and taxonomies. There's no complex abstraction layer to learn. If you understand how your content should be structured, you can map it directly to Zola's concepts.</p>
+<h2 id="where-zola-shines">Where Zola Shines</h2>
+<p>Multilingual support is first-class in Zola, not an afterthought. You can create content in multiple languages without wrestling with plugins or custom configurations. The documentation is clear, and the patterns are consistent.</p>
+<p>The templating system, Tera, strikes a good balance between power and simplicity. It's Jinja2-inspired, so if you've worked with Python or Ansible, you'll feel at home. Macros, filters, and template inheritance work as you'd expect.</p>
+<h2 id="the-trade-offs">The Trade-offs</h2>
+<p>Zola's ecosystem is smaller than Hugo's or Gatsby's. You won't find thousands of themes or plugins. This is both a constraint and a feature—it pushes you to build exactly what you need rather than cobbling together plugins that might conflict.</p>
+<p>The documentation is generally solid, though some advanced use cases require digging into GitHub issues or the community forum. The project is actively maintained, but it's a smaller team compared to other generators.</p>
+<h2 id="is-zola-right-for-you">Is Zola Right for You?</h2>
+<p>If you value simplicity, speed, and a single-binary distribution over a massive ecosystem, Zola is worth trying. It's particularly well-suited for blogs, documentation sites, and portfolios where you want full control without complexity.</p>
+<p>The learning curve is gentle, the builds are fast, and you'll spend more time writing content than configuring your build pipeline. Sometimes that's exactly what you need.</p>
+
+    </div>
+
+    <!-- Previous / Next Navigation -->
+    
+    <nav class="post-pagination" aria-label="Article Navigation">
+        
+        <a href="https://josegarcia.dev/writing/creating-blog-with-zola-a-practical-guide/" class="pagination-box prev">
+            <span class="pagination-label">← OLDER</span>
+            <span class="pagination-title">Creating a Blog with Zola: A Practical Guide</span>
+        </a>
+        
+        
+        <a href="https://josegarcia.dev/writing/zola-vs-astro-traditional-ssg-meets-modern-javascript/" class="pagination-box next">
+            <span class="pagination-label">NEWER →</span>
+            <span class="pagination-title">Zola vs Astro: Traditional SSG Meets Modern JavaScript</span>
+        </a>
+        
+    </nav>
+    
+</article>
+
+        </main>
+
+        <!-- Retro Minimalist Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-meta">
+                    <span class="mono-label">SYS // ZOLA 0.23.6</span>
+                    <span class="footer-sep">·</span>
+                    <span>© 2026 Jose Garcia</span>
+                </div>
+                <ul class="footer-links">
+                    
+                        <li><a href="/writing">Writing</a></li>
+                    
+                        <li><a href="/microblog">Microblog</a></li>
+                    
+                        <li><a href="/tags">Tags</a></li>
+                    
+                        <li><a href="/atom.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://josegarcia.dev/js/main.js"></script>
+</body>
+</html>

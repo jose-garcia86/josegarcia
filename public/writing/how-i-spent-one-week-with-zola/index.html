@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How I Spent One Week with Zola — Jose Garcia</title>
+    <meta name="description" content="I gave Zola seven days to prove itself. Here&#39;s what happened when I rebuilt my blog with a Rust-powered static site generator that promised simplicity and speed." />
+    
+    <link rel="alternate" type="application/atom+xml" title="Jose Garcia Atom Feed" href="https://josegarcia.dev/atom.xml" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://josegarcia.dev/css/styles.css" />
+    <script>
+        // Apply saved or system theme before first paint to prevent flash
+        (function () {
+            try {
+                var saved = localStorage.getItem("theme");
+                if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <div class="site-shell">
+        <!-- Top System Bar / Navigation -->
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="brand-link" aria-label="Jose Garcia Home">
+                    <span class="brand-dot" aria-hidden="true"></span>
+                    <span class="brand-name">Jose Garcia</span>
+                    <span class="brand-handle">~/josegarcia.dev</span>
+                </a>
+
+                <div class="header-controls">
+                    <nav class="site-nav" aria-label="Primary Navigation">
+                        
+                            
+                            
+                                
+                            
+                            <a href="/" class="nav-link">
+                                About
+                            </a>
+                        
+                            
+                            
+                                
+                                    
+                                
+                            
+                            <a href="/writing" class="nav-link active">
+                                Writing
+                            </a>
+                        
+                            
+                            
+                                
+                            
+                            <a href="/microblog" class="nav-link">
+                                Microblog
+                            </a>
+                        
+                    </nav>
+
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle light/dark mode">
+                        <span class="theme-toggle-label" data-theme-label>PAPER</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="site-main">
+            
+<article class="single-post">
+    <!-- Top Article Metadata Panel -->
+    <header class="post-header retro-panel">
+        <div class="panel-bar">
+            
+                
+                <a href="https://josegarcia.dev/writing/" class="back-link">← WRITING</a>
+            
+            <div class="post-meta-bar">
+                
+                <time datetime="2025-11-20">2025-11-20</time>
+                
+                
+                <span class="meta-sep">·</span>
+                <span>6 MIN READ</span>
+                
+            </div>
+        </div>
+
+        <div class="post-header-body">
+            <h1 class="post-title">How I Spent One Week with Zola</h1>
+            
+            <p class="post-subtitle">I gave Zola seven days to prove itself. Here&#39;s what happened when I rebuilt my blog with a Rust-powered static site generator that promised simplicity and speed.</p>
+            
+
+            
+            <div class="post-tags">
+                
+                <a href="https://josegarcia.dev/tags/zola/" class="retro-badge">#Zola</a>
+                
+                <a href="https://josegarcia.dev/tags/bloging/" class="retro-badge">#Bloging</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <div class="prose post-prose">
+        <p>I've been putting off rebuilding my blog for months. I knew I wanted to move away from my current setup, but every static site generator I looked at felt like it required too much overhead. Then I came across Zola, and something about the "single binary, zero dependencies" pitch made me curious enough to give it a real shot.</p>
+<p>I gave myself one week. Seven days to evaluate Zola, rebuild my site, and decide if this was the tool I'd been looking for. Here's what actually happened.</p>
+<h2 id="day-1-setup-and-first-impressions">Day 1: Setup and First Impressions</h2>
+<p>The installation was almost anticlimactic. Download a binary, add it to my PATH, run <code>zola init</code>. No virtual environment, no npm install waiting for the progress bar, no dependency resolution. Just... done.</p>
+<p>I spent the rest of day one reading through the documentation and setting up the basic structure. The docs are well-organized and surprisingly concise. Within a few hours, I had a basic site running with <code>zola serve</code>, and the live reload was noticeably fast. Not "fast enough" fast—actually fast.</p>
+<p>The Tera templating syntax felt immediately familiar. If you've used Jinja2 (and I have), you're basically already trained. I threw together a simple base template and a post layout, and I was rendering Markdown by evening.</p>
+<p><strong>Day 1 verdict:</strong> This is refreshingly simple. Cautiously optimistic.</p>
+<h2 id="day-2-content-migration-and-structure">Day 2: Content Migration and Structure</h2>
+<p>I spent day two migrating my existing blog posts and figuring out Zola's content model. This is where the opinionated structure became apparent.</p>
+<p>Zola wants you to organize content into sections. Each section is a directory with an <code>_index.md</code> file. Pages are individual markdown files. It's more structured than just dumping markdown files wherever, but once I understood the pattern, it made sense.</p>
+<p>The front matter format was slightly different from what I was using before, so I wrote a quick script to convert my posts. Nothing complicated—mostly adjusting date formats and metadata fields.</p>
+<p>What surprised me was how fast Zola rebuilt the site even as I was adding more content. I'm used to SSGs slowing down as content grows. Zola just... didn't.</p>
+<p><strong>Day 2 verdict:</strong> The opinionated structure takes some adjustment but pays off in clarity.</p>
+<h2 id="day-3-multilingual-support">Day 3: Multilingual Support</h2>
+<p>I needed my site to work in both English and Spanish. This is where I expected pain, because multilingual support is usually either an afterthought or a complex configuration nightmare.</p>
+<p>Zola's multilingual support is shockingly straightforward. You add <code>default_language</code> to your config, define your languages, and create content with language codes in the filenames (like <code>about.es.md</code>). That's it. Zola handles the routing and switching.</p>
+<p>I spent maybe two hours setting this up, including creating translated versions of my templates. The language switching just worked. No plugins, no complex routing rules, no confusion.</p>
+<p><strong>Day 3 verdict:</strong> This is how multilingual support should work everywhere.</p>
+<h2 id="day-4-building-the-features-i-actually-want">Day 4: Building the Features I Actually Want</h2>
+<p>Day four was about building the features I actually needed: a featured posts section, proper pagination, tag pages, and RSS feeds.</p>
+<p>RSS was already built-in. Just enable it in the config. Done.</p>
+<p>Pagination is built-in. Add a few lines to your template. Done.</p>
+<p>Taxonomies (tags, categories) are first-class concepts. Configure them once, use them everywhere.</p>
+<p>The featured posts section required a bit more thought. I added a <code>featured</code> field to my post front matter, then filtered posts in my template:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="plain"><span class="giallo-l"><span>{% set featured = section.pages | filter(attribute=&quot;extra.featured&quot;, value=true) %}</span></span></code></pre>
+<p>Clean, readable, works perfectly. By the end of day four, my site had all the features I wanted, and I hadn't written any plugins or external scripts.</p>
+<p><strong>Day 4 verdict:</strong> Built-in features cover 90% of what you actually need.</p>
+<h2 id="day-5-styling-with-sass">Day 5: Styling with Sass</h2>
+<p>I don't love writing CSS, but I do like Sass for organization and variables. Zola compiles Sass out of the box.</p>
+<p>I created a <code>sass</code> directory, wrote my styles with nesting and variables, and Zola just handled it. No webpack configuration, no additional dependencies, no build scripts. It compiled on save and the changes appeared immediately.</p>
+<p>This is where the "batteries included" philosophy really clicked. Every time I expected to need an extra tool or plugin, Zola already had it built-in.</p>
+<p><strong>Day 5 verdict:</strong> The more I use Zola, the less I have to configure.</p>
+<h2 id="day-6-polish-and-refinements">Day 6: Polish and Refinements</h2>
+<p>Day six was cleanup: improving templates, adding proper metadata, testing the build on different content, and making sure everything worked correctly.</p>
+<p>I experimented with Zola's shortcodes for embedding content in Markdown. They're straightforward—define a template, call it from markdown. I built a couple for image galleries and code examples.</p>
+<p>I also tested the production build. The output is clean, minimal, and fast. Zola doesn't add unnecessary JavaScript or bloat. What you build is what you get.</p>
+<p><strong>Day 6 verdict:</strong> The polish is in the details Zola got right.</p>
+<h2 id="day-7-deployment-and-reflection">Day 7: Deployment and Reflection</h2>
+<p>The final day was about deployment. I pushed to GitHub, set up a simple GitHub Action that downloads Zola, builds the site, and deploys to GitHub Pages. The entire CI script is about 15 lines.</p>
+<p>No installing Node.js in CI, no pip installing dependencies, no caching layers to speed up repeated builds. Download one binary, run one command, deploy.</p>
+<p>As I looked at what I'd built in a week, I realized something: I'd spent most of my time building my site, not configuring my build tool. I wasn't debugging plugin conflicts or wrestling with complicated documentation. I was writing templates, styling pages, and migrating content.</p>
+<p><strong>Day 7 verdict:</strong> This is what I've been looking for.</p>
+<h2 id="what-i-learned-about-zola">What I Learned About Zola</h2>
+<p><strong>The speed is real.</strong> It's not marketing. Rebuilds are genuinely fast enough that the feedback loop feels instant. This matters more than you'd think—it keeps you in flow instead of waiting.</p>
+<p><strong>Batteries included works.</strong> I'm used to static site generators being minimal cores that you extend with plugins. Zola's approach of including everything is different, but it's efficient. I never had to evaluate plugins or worry about compatibility.</p>
+<p><strong>Opinionated structure helps.</strong> At first, Zola's structured content model felt restrictive. By day three, I appreciated it. The constraints make things predictable, and predictable means less time deciding how to organize things.</p>
+<p><strong>Tera is excellent.</strong> The templating is powerful enough for anything I needed but simple enough to read six months from now. The Jinja2 inspiration was the right call.</p>
+<p><strong>Zero dependencies isn't just a feature—it's a philosophy.</strong> Not managing Python versions, npm packages, or virtual environments removed an entire category of problems. My project is my content and my templates. That's it.</p>
+<h2 id="what-i-missed-briefly">What I Missed (Briefly)</h2>
+<p>The plugin ecosystem. When I wanted something custom, I had to build it in templates rather than reaching for a plugin. This was actually fine—Tera is capable enough—but there were moments where I wished for a Python script or npm package.</p>
+<p>The theme ecosystem is smaller. I built my own design, which I wanted to do anyway, but if you're hoping to grab a polished theme and go, options are limited.</p>
+<h2 id="the-verdict">The Verdict</h2>
+<p>Seven days in, I'm keeping Zola.</p>
+<p>This isn't because Zola does things other static site generators can't—it's because Zola does fewer things but does them with less friction. The simplicity isn't simplistic; it's intentional.</p>
+<p>I came in skeptical that a tool could be both powerful and simple. Zola proved me wrong by being opinionated about the right things and flexible about everything else.</p>
+<p>My blog is live, builds are fast, development is pleasant, and I have zero dependencies to maintain. If that sounds appealing, give Zola a week. You might be surprised how much you can build when the tool gets out of your way.</p>
+<h2 id="resources-that-helped">Resources That Helped</h2>
+<ul>
+<li>The official Zola documentation (start here)</li>
+<li>The Tera template documentation (for advanced templating)</li>
+<li>Zola's GitHub discussions (helpful community)</li>
+<li>Example sites in Zola's showcase (seeing real implementations helps)</li>
+</ul>
+<p>Would I recommend Zola? If you want simplicity, speed, and don't need extensive plugin ecosystems, absolutely. If you need complex Python integrations or want thousands of themes to choose from, look elsewhere.</p>
+<p>For me, Zola hit the sweet spot: powerful enough for what I need, simple enough to stay out of my way. One week was enough to be convinced.</p>
+
+    </div>
+
+    <!-- Previous / Next Navigation -->
+    
+    <nav class="post-pagination" aria-label="Article Navigation">
+        
+        <a href="https://josegarcia.dev/writing/migrating-from-wordpress-to-zola/" class="pagination-box prev">
+            <span class="pagination-label">← OLDER</span>
+            <span class="pagination-title">Migrating from WordPress to Zola: A Practical Guide</span>
+        </a>
+        
+        
+        <a href="https://josegarcia.dev/writing/creating-blog-with-zola-a-practical-guide/" class="pagination-box next">
+            <span class="pagination-label">NEWER →</span>
+            <span class="pagination-title">Creating a Blog with Zola: A Practical Guide</span>
+        </a>
+        
+    </nav>
+    
+</article>
+
+        </main>
+
+        <!-- Retro Minimalist Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-meta">
+                    <span class="mono-label">SYS // ZOLA 0.23.6</span>
+                    <span class="footer-sep">·</span>
+                    <span>© 2026 Jose Garcia</span>
+                </div>
+                <ul class="footer-links">
+                    
+                        <li><a href="/writing">Writing</a></li>
+                    
+                        <li><a href="/microblog">Microblog</a></li>
+                    
+                        <li><a href="/tags">Tags</a></li>
+                    
+                        <li><a href="/atom.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://josegarcia.dev/js/main.js"></script>
+</body>
+</html>

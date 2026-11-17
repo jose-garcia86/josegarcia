@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creating a Blog with Zola: A Practical Guide — Jose Garcia</title>
+    <meta name="description" content="A step-by-step walkthrough of building a real blog with Zola, from installation to deployment. Learn the practical decisions and patterns that make Zola development efficient." />
+    
+    <link rel="alternate" type="application/atom+xml" title="Jose Garcia Atom Feed" href="https://josegarcia.dev/atom.xml" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://josegarcia.dev/css/styles.css" />
+    <script>
+        // Apply saved or system theme before first paint to prevent flash
+        (function () {
+            try {
+                var saved = localStorage.getItem("theme");
+                if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <div class="site-shell">
+        <!-- Top System Bar / Navigation -->
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="brand-link" aria-label="Jose Garcia Home">
+                    <span class="brand-dot" aria-hidden="true"></span>
+                    <span class="brand-name">Jose Garcia</span>
+                    <span class="brand-handle">~/josegarcia.dev</span>
+                </a>
+
+                <div class="header-controls">
+                    <nav class="site-nav" aria-label="Primary Navigation">
+                        
+                            
+                            
+                                
+                            
+                            <a href="/" class="nav-link">
+                                About
+                            </a>
+                        
+                            
+                            
+                                
+                                    
+                                
+                            
+                            <a href="/writing" class="nav-link active">
+                                Writing
+                            </a>
+                        
+                            
+                            
+                                
+                            
+                            <a href="/microblog" class="nav-link">
+                                Microblog
+                            </a>
+                        
+                    </nav>
+
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle light/dark mode">
+                        <span class="theme-toggle-label" data-theme-label>PAPER</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="site-main">
+            
+<article class="single-post">
+    <!-- Top Article Metadata Panel -->
+    <header class="post-header retro-panel">
+        <div class="panel-bar">
+            
+                
+                <a href="https://josegarcia.dev/writing/" class="back-link">← WRITING</a>
+            
+            <div class="post-meta-bar">
+                
+                <time datetime="2025-11-19">2025-11-19</time>
+                
+                
+                <span class="meta-sep">·</span>
+                <span>4 MIN READ</span>
+                
+            </div>
+        </div>
+
+        <div class="post-header-body">
+            <h1 class="post-title">Creating a Blog with Zola: A Practical Guide</h1>
+            
+            <p class="post-subtitle">A step-by-step walkthrough of building a real blog with Zola, from installation to deployment. Learn the practical decisions and patterns that make Zola development efficient.</p>
+            
+
+            
+            <div class="post-tags">
+                
+                <a href="https://josegarcia.dev/tags/zola/" class="retro-badge">#Zola</a>
+                
+                <a href="https://josegarcia.dev/tags/bloging/" class="retro-badge">#Bloging</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <div class="prose post-prose">
+        <p>Building a blog with Zola is straightforward, but there are patterns and decisions that aren't immediately obvious from the documentation. This guide walks through creating a real blog, covering the practical choices you'll face and the solutions that work well.</p>
+<h2 id="getting-started-installation-and-project-setup">Getting Started: Installation and Project Setup</h2>
+<p>First, install Zola. Download the binary for your platform from the releases page, or use a package manager:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #6A737D;"># macOS</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">brew</span><span style="color: #9ECBFF;"> install zola</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Linux</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">snap</span><span style="color: #9ECBFF;"> install zola</span><span style="color: #79B8FF;"> --edge</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Or download the binary directly</span></span></code></pre>
+<p>Create your project:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #B392F0;">zola</span><span style="color: #9ECBFF;"> init my-blog</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">cd</span><span style="color: #9ECBFF;"> my-blog</span></span></code></pre>
+<p>Zola will ask a few questions. For a blog, answer:</p>
+<ul>
+<li>URL: Your production URL (you can change this later)</li>
+<li>Sass compilation: Yes</li>
+<li>Syntax highlighting: Yes</li>
+</ul>
+<p>Your directory structure looks like this:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="plain"><span class="giallo-l"><span>my-blog/</span></span>
+<span class="giallo-l"><span>├── config.toml</span></span>
+<span class="giallo-l"><span>├── content/</span></span>
+<span class="giallo-l"><span>├── sass/</span></span>
+<span class="giallo-l"><span>├── static/</span></span>
+<span class="giallo-l"><span>├── templates/</span></span>
+<span class="giallo-l"><span>└── themes/</span></span></code></pre><h2 id="configuration-the-foundation">Configuration: The Foundation</h2>
+<p>Open <code>config.toml</code> and configure the essentials:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="toml"><span class="giallo-l"><span>base_url =</span><span style="color: #9ECBFF;"> &quot;https://yourdomain.com&quot;</span></span>
+<span class="giallo-l"><span>title =</span><span style="color: #9ECBFF;"> &quot;Your Blog Name&quot;</span></span>
+<span class="giallo-l"><span>description =</span><span style="color: #9ECBFF;"> &quot;A brief description of your blog&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Compile Sass files</span></span>
+<span class="giallo-l"><span>compile_sass =</span><span style="color: #79B8FF;"> true</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Enable syntax highlighting for code blocks</span></span>
+<span class="giallo-l"><span>highlight_code =</span><span style="color: #79B8FF;"> true</span></span>
+<span class="giallo-l"><span>highlight_theme =</span><span style="color: #9ECBFF;"> &quot;base16-ocean-dark&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Generate RSS feed</span></span>
+<span class="giallo-l"><span>generate_feed =</span><span style="color: #79B8FF;"> true</span></span>
+<span class="giallo-l"><span>feed_filename =</span><span style="color: #9ECBFF;"> &quot;rss.xml&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Taxonomies (tags and categories)</span></span>
+<span class="giallo-l"><span>taxonomies = [</span></span>
+<span class="giallo-l"><span>    {name =</span><span style="color: #9ECBFF;"> &quot;tags&quot;</span><span>, feed =</span><span style="color: #79B8FF;"> true</span><span>},</span></span>
+<span class="giallo-l"><span>    {name =</span><span style="color: #9ECBFF;"> &quot;categories&quot;</span><span>, feed =</span><span style="color: #79B8FF;"> true</span><span>},</span></span>
+<span class="giallo-l"><span>]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>[</span><span style="color: #B392F0;">markdown</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Enable smart punctuation and other features</span></span>
+<span class="giallo-l"><span>smart_punctuation =</span><span style="color: #79B8FF;"> true</span></span>
+<span class="giallo-l"><span>highlight_code =</span><span style="color: #79B8FF;"> true</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>[</span><span style="color: #B392F0;">extra</span><span>]</span></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Add any custom variables you need</span></span>
+<span class="giallo-l"><span>author =</span><span style="color: #9ECBFF;"> &quot;Your Name&quot;</span></span>
+<span class="giallo-l"><span>github =</span><span style="color: #9ECBFF;"> &quot;https://github.com/yourusername&quot;</span></span>
+<span class="giallo-l"><span>twitter =</span><span style="color: #9ECBFF;"> &quot;yourusername&quot;</span></span></code></pre>
+<p>This configuration gives you a solid foundation: RSS feeds, taxonomies for organizing content, and code highlighting.</p>
+<h2 id="content-structure-organizing-your-posts">Content Structure: Organizing Your Posts</h2>
+<p>Create a blog section in <code>content/blog/</code>:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #B392F0;">mkdir</span><span style="color: #79B8FF;"> -p</span><span style="color: #9ECBFF;"> content/blog</span></span></code></pre>
+<p>Create <code>content/blog/_index.md</code>:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="markdown"><span class="giallo-l"><span>+++</span></span>
+<span class="giallo-l"><span>title = &quot;Blog&quot;</span></span>
+<span class="giallo-l"><span>sort_by = &quot;date&quot;</span></span>
+<span class="giallo-l"><span>template = &quot;blog.html&quot;</span></span>
+<span class="giallo-l"><span>page_template = &quot;blog-page.html&quot;</span></span>
+<span class="giallo-l"><span>paginate_by = 10</span></span>
+<span class="giallo-l"><span>+++</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>Welcome to my blog where I write about web development, programming, and technology.</span></span></code></pre>
+<p>This file defines how the blog section behaves:</p>
+<ul>
+<li><code>sort_by = "date"</code> orders posts by publication date</li>
+<li><code>paginate_by = 10</code> creates pagination every 10 posts</li>
+<li><code>template</code> defines the list view</li>
+<li><code>page_template</code> defines individual post view</li>
+</ul>
+<h2 id="creating-your-first-post">Creating Your First Post</h2>
+<p>Create <code>content/blog/hello-world.md</code>:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="markdown"><span class="giallo-l"><span>+++</span></span>
+<span class="giallo-l"><span>title = &quot;Hello World: Starting a New Blog&quot;</span></span>
+<span class="giallo-l"><span>date = 2025-11-16</span></span>
+<span class="giallo-l"><span>description = &quot;My first post on this new blog built with Zola&quot;</span></span>
+<span class="giallo-l"><span>[</span><span style="color: #DBEDFF;text-decoration: underline;">taxonomies</span><span>]</span></span>
+<span class="giallo-l"><span>tags = [&quot;meta&quot;, &quot;blogging&quot;]</span></span>
+<span class="giallo-l"><span>categories = [</span><span style="color: #DBEDFF;text-decoration: underline;">&quot;General&quot;</span><span>]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>[</span><span style="color: #DBEDFF;text-decoration: underline;">extra</span><span>]</span></span>
+<span class="giallo-l"><span>featured = true</span></span>
+<span class="giallo-l"><span>+++</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>Welcome to my blog! This is my first post built with Zola, and I&#39;m excited to share what I&#39;m learning.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">&lt;!-- more --&gt;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #79B8FF;font-weight: bold;">## Why Zola?</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>I chose Zola for several reasons:</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">-</span><span> Fast builds</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">-</span><span> Zero dependencies</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">-</span><span> Simple configuration</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">-</span><span> Great multilingual support</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #79B8FF;font-weight: bold;">## What&#39;s Next?</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>I plan to write about web development, share tutorials, and document my learning journey.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>Stay tuned for more content!</span></span></code></pre>
+<p>The <code>&lt;!-- more --&gt;</code> tag creates a summary break. Text before it appears in post previews.</p>
+<h2 id="templates-building-the-blog-layout">Templates: Building the Blog Layout</h2>
+<p>Create <code>templates/base.html</code> as your foundation:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="html"><span class="giallo-l"><span>&lt;!</span><span style="color: #85E89D;">DOCTYPE</span><span style="color: #B392F0;"> html</span><span>&gt;</span></span>
+<span class="giallo-l"><span>&lt;</span><span style="color: #85E89D;">html</span><span style="color: #B392F0;"> lang</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ lang | default(value=&quot;</span><span style="color: #B392F0;">en</span><span style="color: #FDAEB7;font-style: italic;">&quot;)</span><span style="color: #B392F0;"> }}</span><span style="color: #FDAEB7;font-style: italic;">&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>&lt;</span><span style="color: #85E89D;">head</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">meta</span><span style="color: #B392F0;"> charset</span><span>=</span><span style="color: #9ECBFF;">&quot;UTF-8&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">meta</span><span style="color: #B392F0;"> name</span><span>=</span><span style="color: #9ECBFF;">&quot;viewport&quot;</span><span style="color: #B392F0;"> content</span><span>=</span><span style="color: #9ECBFF;">&quot;width=device-width, initial-scale=1.0&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">title</span><span>&gt;{% block title %}{{ config.title }}{% endblock %}&lt;/</span><span style="color: #85E89D;">title</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">meta</span><span style="color: #B392F0;"> name</span><span>=</span><span style="color: #9ECBFF;">&quot;description&quot;</span><span style="color: #B392F0;"> content</span><span>=</span><span style="color: #9ECBFF;">&quot;{% block description %}{{ config.description }}{% endblock %}&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    {% if config.generate_feed %}</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">link</span><span style="color: #B392F0;"> rel</span><span>=</span><span style="color: #9ECBFF;">&quot;alternate&quot;</span><span style="color: #B392F0;"> type</span><span>=</span><span style="color: #9ECBFF;">&quot;application/rss+xml&quot;</span><span style="color: #B392F0;"> title</span><span>=</span><span style="color: #9ECBFF;">&quot;RSS&quot;</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;#&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    {% endif %}</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">link</span><span style="color: #B392F0;"> rel</span><span>=</span><span style="color: #9ECBFF;">&quot;/&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>&lt;/</span><span style="color: #85E89D;">head</span><span>&gt;</span></span>
+<span class="giallo-l"><span>&lt;</span><span style="color: #85E89D;">body</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">header</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">nav</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;#&quot;</span><span>&gt;{{ config.title }}&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;#&quot;</span><span>&gt;Blog&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;#&quot;</span><span>&gt;About&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;/</span><span style="color: #85E89D;">nav</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">header</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">main</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% block content %}{% endblock %}</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">main</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">footer</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">p</span><span>&gt;</span><span style="color: #79B8FF;">&amp;copy;</span><span> {{ now() | date(format=&quot;%Y&quot;) }} {{ config.extra.author }}&lt;/</span><span style="color: #85E89D;">p</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">footer</span><span>&gt;</span></span>
+<span class="giallo-l"><span>&lt;/</span><span style="color: #85E89D;">body</span><span>&gt;</span></span>
+<span class="giallo-l"><span>&lt;/</span><span style="color: #85E89D;">html</span><span>&gt;</span></span></code></pre>
+<p>Create <code>templates/blog.html</code> for the blog list:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="html"><span class="giallo-l"><span>{% extends &quot;base.html&quot; %}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>{% block title %}{{ section.title }} | {{ config.title }}{% endblock %}</span></span>
+<span class="giallo-l"><span>{% block description %}{{ section.description | default(value=config.description) }}{% endblock %}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>{% block content %}</span></span>
+<span class="giallo-l"><span>&lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;blog-list&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">h1</span><span>&gt;{{ section.title }}&lt;/</span><span style="color: #85E89D;">h1</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    {{ section.content | safe }}</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    {% if section.pages %}</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;posts&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% for page in section.pages %}</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">article</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;post-preview&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">h2</span><span>&gt;&lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.permalink }}&quot;</span><span>&gt;{{ page.title }}&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;&lt;/</span><span style="color: #85E89D;">h2</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">time</span><span style="color: #B392F0;"> datetime</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.date }}&quot;</span><span>&gt;{{ page.date | date(format=&quot;%B %d, %Y&quot;) }}&lt;/</span><span style="color: #85E89D;">time</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            </span></span>
+<span class="giallo-l"><span>            {% if page.summary %}</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">p</span><span>&gt;{{ page.summary | safe }}&lt;/</span><span style="color: #85E89D;">p</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% elif page.description %}</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">p</span><span>&gt;{{ page.description }}&lt;/</span><span style="color: #85E89D;">p</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% endif %}</span></span>
+<span class="giallo-l"><span>            </span></span>
+<span class="giallo-l"><span>            {% if page.taxonomies.tags %}</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;tags&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                {% for tag in page.taxonomies.tags %}</span></span>
+<span class="giallo-l"><span>                &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ get_taxonomy_url(kind=&quot;</span><span style="color: #B392F0;">tags</span><span style="color: #FDAEB7;font-style: italic;">&quot;,</span><span style="color: #B392F0;"> name</span><span>=</span><span style="color: #9ECBFF;">tag)</span><span style="color: #B392F0;"> }}</span><span style="color: #FDAEB7;font-style: italic;">&quot;</span><span>&gt;#{{ tag }}&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                {% endfor %}</span></span>
+<span class="giallo-l"><span>            &lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% endif %}</span></span>
+<span class="giallo-l"><span>            </span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.permalink }}&quot;</span><span>&gt;Read more →&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;/</span><span style="color: #85E89D;">article</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% endfor %}</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    {% endif %}</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    {% if paginator %}</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">nav</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;pagination&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% if paginator.previous %}</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ paginator.previous }}&quot;</span><span>&gt;← Newer&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% endif %}</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">span</span><span>&gt;Page {{ paginator.current_index }} of {{ paginator.number_pagers }}&lt;/</span><span style="color: #85E89D;">span</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span>        {% if paginator.next %}</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ paginator.next }}&quot;</span><span>&gt;Older →&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% endif %}</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">nav</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    {% endif %}</span></span>
+<span class="giallo-l"><span>&lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>{% endblock %}</span></span></code></pre>
+<p>Create <code>templates/blog-page.html</code> for individual posts:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="html"><span class="giallo-l"><span>{% extends &quot;base.html&quot; %}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}</span></span>
+<span class="giallo-l"><span>{% block description %}{{ page.description | default(value=page.summary) }}{% endblock %}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>{% block content %}</span></span>
+<span class="giallo-l"><span>&lt;</span><span style="color: #85E89D;">article</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;blog-post&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">header</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">h1</span><span>&gt;{{ page.title }}&lt;/</span><span style="color: #85E89D;">h1</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;post-meta&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">time</span><span style="color: #B392F0;"> datetime</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.date }}&quot;</span><span>&gt;{{ page.date | date(format=&quot;%B %d, %Y&quot;) }}&lt;/</span><span style="color: #85E89D;">time</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% if page.extra.reading_time %}</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">span</span><span>&gt;• {{ page.reading_time }} min read&lt;/</span><span style="color: #85E89D;">span</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% endif %}</span></span>
+<span class="giallo-l"><span>        &lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span>        {% if page.taxonomies.tags %}</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;tags&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% for tag in page.taxonomies.tags %}</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ get_taxonomy_url(kind=&quot;</span><span style="color: #B392F0;">tags</span><span style="color: #FDAEB7;font-style: italic;">&quot;,</span><span style="color: #B392F0;"> name</span><span>=</span><span style="color: #9ECBFF;">tag)</span><span style="color: #B392F0;"> }}</span><span style="color: #FDAEB7;font-style: italic;">&quot;</span><span>&gt;#{{ tag }}&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% endfor %}</span></span>
+<span class="giallo-l"><span>        &lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% endif %}</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">header</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;post-content&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {{ page.content | safe }}</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    {% if page.earlier or page.later %}</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">nav</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;post-navigation&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% if page.earlier %}</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.earlier.permalink }}&quot;</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;prev&quot;</span><span>&gt;← {{ page.earlier.title }}&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% endif %}</span></span>
+<span class="giallo-l"><span>        {% if page.later %}</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.later.permalink }}&quot;</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;next&quot;</span><span>&gt;{{ page.later.title }} →&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        {% endif %}</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">nav</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    {% endif %}</span></span>
+<span class="giallo-l"><span>&lt;/</span><span style="color: #85E89D;">article</span><span>&gt;</span></span>
+<span class="giallo-l"><span>{% endblock %}</span></span></code></pre><h2 id="styling-with-sass">Styling with Sass</h2>
+<p>Create <code>sass/style.scss</code>:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="scss"><span class="giallo-l"><span style="color: #6A737D;">// Variables</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">$primary-color</span><span>:</span><span style="color: #79B8FF;"> #2563eb</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">$text-color</span><span>:</span><span style="color: #79B8FF;"> #1f2937</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">$background</span><span>:</span><span style="color: #79B8FF;"> #ffffff</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">$border-color</span><span>:</span><span style="color: #79B8FF;"> #e5e7eb</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #FFAB70;">$max-width</span><span>:</span><span style="color: #79B8FF;"> 800</span><span style="color: #F97583;">px</span><span>;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">// Base styles</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">*</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    margin</span><span>:</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    padding</span><span>:</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    box-sizing</span><span>:</span><span style="color: #79B8FF;"> border-box</span><span>;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #85E89D;">body</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    font-family</span><span>:</span><span style="color: #79B8FF;"> system-ui</span><span>, </span><span style="color: #79B8FF;">-apple-system</span><span>, </span><span style="color: #79B8FF;">sans-serif</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    line-height</span><span>:</span><span style="color: #79B8FF;"> 1.6</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    color</span><span>:</span><span style="color: #FFAB70;"> $text-color</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    background</span><span>:</span><span style="color: #FFAB70;"> $background</span><span>;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">// Layout</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">header</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    border-bottom</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">px</span><span style="color: #79B8FF;"> solid</span><span style="color: #FFAB70;"> $border-color</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    padding</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    nav</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        max-width</span><span>:</span><span style="color: #FFAB70;"> $max-width</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        margin</span><span>:</span><span style="color: #79B8FF;"> 0 auto</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        padding</span><span>:</span><span style="color: #79B8FF;"> 0 1</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        display</span><span>:</span><span style="color: #79B8FF;"> flex</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        gap</span><span>:</span><span style="color: #79B8FF;"> 2</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        a</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            text-decoration</span><span>:</span><span style="color: #79B8FF;"> none</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            color</span><span>:</span><span style="color: #FFAB70;"> $text-color</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            font-weight</span><span>:</span><span style="color: #79B8FF;"> 500</span><span>;</span></span>
+<span class="giallo-l"><span>            </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">            &amp;</span><span style="color: #B392F0;">:hover</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">                color</span><span>:</span><span style="color: #FFAB70;"> $primary-color</span><span>;</span></span>
+<span class="giallo-l"><span>            }</span></span>
+<span class="giallo-l"><span>            </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">            &amp;</span><span style="color: #B392F0;">:first-child</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">                font-weight</span><span>:</span><span style="color: #79B8FF;"> 700</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">                margin-right</span><span>:</span><span style="color: #79B8FF;"> auto</span><span>;</span></span>
+<span class="giallo-l"><span>            }</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #85E89D;">main</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    max-width</span><span>:</span><span style="color: #FFAB70;"> $max-width</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    margin</span><span>:</span><span style="color: #79B8FF;"> 2</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> auto</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    padding</span><span>:</span><span style="color: #79B8FF;"> 0 1</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #85E89D;">footer</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    border-top</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">px</span><span style="color: #79B8FF;"> solid</span><span style="color: #FFAB70;"> $border-color</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    padding</span><span>:</span><span style="color: #79B8FF;"> 2</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    text-align</span><span>:</span><span style="color: #79B8FF;"> center</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    color</span><span>:</span><span style="color: #79B8FF;"> #6b7280</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    margin-top</span><span>:</span><span style="color: #79B8FF;"> 4</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">// Blog styles</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">.post-preview</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    margin-bottom</span><span>:</span><span style="color: #79B8FF;"> 3</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    h2</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        margin-bottom</span><span>:</span><span style="color: #79B8FF;"> 0.5</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        a</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            color</span><span>:</span><span style="color: #FFAB70;"> $text-color</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            text-decoration</span><span>:</span><span style="color: #79B8FF;"> none</span><span>;</span></span>
+<span class="giallo-l"><span>            </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">            &amp;</span><span style="color: #B392F0;">:hover</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">                color</span><span>:</span><span style="color: #FFAB70;"> $primary-color</span><span>;</span></span>
+<span class="giallo-l"><span>            }</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    time</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        color</span><span>:</span><span style="color: #79B8FF;"> #6b7280</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        font-size</span><span>:</span><span style="color: #79B8FF;"> 0.9</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    p</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        margin</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #B392F0;">.blog-post</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">    .post-content</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        margin</span><span>:</span><span style="color: #79B8FF;"> 2</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        h2</span><span>, </span><span style="color: #85E89D;">h3</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            margin</span><span>:</span><span style="color: #79B8FF;"> 2</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0 1</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        p</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            margin</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        code</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            background</span><span>:</span><span style="color: #79B8FF;"> #f3f4f6</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            padding</span><span>:</span><span style="color: #79B8FF;"> 0.2</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0.4</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            border-radius</span><span>:</span><span style="color: #79B8FF;"> 3</span><span style="color: #F97583;">px</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            font-size</span><span>:</span><span style="color: #79B8FF;"> 0.9</span><span style="color: #F97583;">em</span><span>;</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        pre</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            background</span><span>:</span><span style="color: #79B8FF;"> #1f2937</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            color</span><span>:</span><span style="color: #79B8FF;"> #f3f4f6</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            padding</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            border-radius</span><span>:</span><span style="color: #79B8FF;"> 5</span><span style="color: #F97583;">px</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            overflow-x</span><span>:</span><span style="color: #79B8FF;"> auto</span><span>;</span></span>
+<span class="giallo-l"><span>            </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">            code</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">                background</span><span>:</span><span style="color: #79B8FF;"> none</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">                padding</span><span>:</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span>            }</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #B392F0;">.tags</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    display</span><span>:</span><span style="color: #79B8FF;"> flex</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    gap</span><span>:</span><span style="color: #79B8FF;"> 0.5</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    flex-wrap</span><span>:</span><span style="color: #79B8FF;"> wrap</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    margin</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    a</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        background</span><span>:</span><span style="color: #79B8FF;"> #f3f4f6</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        padding</span><span>:</span><span style="color: #79B8FF;"> 0.25</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0.75</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        border-radius</span><span>:</span><span style="color: #79B8FF;"> 3</span><span style="color: #F97583;">px</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        text-decoration</span><span>:</span><span style="color: #79B8FF;"> none</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        color</span><span>:</span><span style="color: #FFAB70;"> $text-color</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        font-size</span><span>:</span><span style="color: #79B8FF;"> 0.9</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        &amp;</span><span style="color: #B392F0;">:hover</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            background</span><span>:</span><span style="color: #FFAB70;"> $primary-color</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">            color</span><span>:</span><span style="color: #79B8FF;"> white</span><span>;</span></span>
+<span class="giallo-l"><span>        }</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #B392F0;">.pagination</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    display</span><span>:</span><span style="color: #79B8FF;"> flex</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    justify-content</span><span>:</span><span style="color: #79B8FF;"> space-between</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    align-items</span><span>:</span><span style="color: #79B8FF;"> center</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    margin</span><span>:</span><span style="color: #79B8FF;"> 3</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    padding</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span style="color: #79B8FF;"> 0</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">    border-top</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">px</span><span style="color: #79B8FF;"> solid</span><span style="color: #FFAB70;"> $border-color</span><span>;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">// Responsive</span></span>
+<span class="giallo-l"><span style="color: #F97583;">@media</span><span> (</span><span style="color: #79B8FF;">max-width</span><span>:</span><span style="color: #79B8FF;"> 768</span><span style="color: #F97583;">px</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    header nav</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        flex-direction</span><span>:</span><span style="color: #79B8FF;"> column</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">        gap</span><span>:</span><span style="color: #79B8FF;"> 1</span><span style="color: #F97583;">rem</span><span>;</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre><h2 id="adding-homepage">Adding Homepage</h2>
+<p>Create <code>content/_index.md</code>:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="markdown"><span class="giallo-l"><span>+++</span></span>
+<span class="giallo-l"><span>title = &quot;Home&quot;</span></span>
+<span class="giallo-l"><span>template = &quot;index.html&quot;</span></span>
+<span class="giallo-l"><span>+++</span></span></code></pre>
+<p>Create <code>templates/index.html</code>:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="html"><span class="giallo-l"><span>{% extends &quot;base.html&quot; %}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>{% block content %}</span></span>
+<span class="giallo-l"><span>&lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;home&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">h1</span><span>&gt;Welcome to {{ config.title }}&lt;/</span><span style="color: #85E89D;">h1</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">p</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;intro&quot;</span><span>&gt;{{ config.description }}&lt;/</span><span style="color: #85E89D;">p</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    {% set blog_section = get_section(path=&quot;blog/_index.md&quot;) %}</span></span>
+<span class="giallo-l"><span>    {% if blog_section.pages %}</span></span>
+<span class="giallo-l"><span>    &lt;</span><span style="color: #85E89D;">section</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;recent-posts&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">h2</span><span>&gt;Recent Posts&lt;/</span><span style="color: #85E89D;">h2</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">div</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;posts&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% for page in blog_section.pages | slice(end=5) %}</span></span>
+<span class="giallo-l"><span>            &lt;</span><span style="color: #85E89D;">article</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;post-preview&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                &lt;</span><span style="color: #85E89D;">h3</span><span>&gt;&lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.permalink }}&quot;</span><span>&gt;{{ page.title }}&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;&lt;/</span><span style="color: #85E89D;">h3</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                &lt;</span><span style="color: #85E89D;">time</span><span style="color: #B392F0;"> datetime</span><span>=</span><span style="color: #9ECBFF;">&quot;{{ page.date }}&quot;</span><span>&gt;{{ page.date | date(format=&quot;%B %d, %Y&quot;) }}&lt;/</span><span style="color: #85E89D;">time</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                {% if page.description %}</span></span>
+<span class="giallo-l"><span>                &lt;</span><span style="color: #85E89D;">p</span><span>&gt;{{ page.description }}&lt;/</span><span style="color: #85E89D;">p</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                {% endif %}</span></span>
+<span class="giallo-l"><span>            &lt;/</span><span style="color: #85E89D;">article</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            {% endfor %}</span></span>
+<span class="giallo-l"><span>        &lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;</span><span style="color: #85E89D;">a</span><span style="color: #B392F0;"> href</span><span>=</span><span style="color: #9ECBFF;">&quot;#&quot;</span><span style="color: #B392F0;"> class</span><span>=</span><span style="color: #9ECBFF;">&quot;view-all&quot;</span><span>&gt;View all posts →&lt;/</span><span style="color: #85E89D;">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    &lt;/</span><span style="color: #85E89D;">section</span><span>&gt;</span></span>
+<span class="giallo-l"><span>    {% endif %}</span></span>
+<span class="giallo-l"><span>&lt;/</span><span style="color: #85E89D;">div</span><span>&gt;</span></span>
+<span class="giallo-l"><span>{% endblock %}</span></span></code></pre><h2 id="running-your-blog">Running Your Blog</h2>
+<p>Start the development server:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #B392F0;">zola</span><span style="color: #9ECBFF;"> serve</span></span></code></pre>
+<p>Visit <code>http://127.0.0.1:1111</code> to see your blog. Changes to content and templates reload automatically.</p>
+<h2 id="building-for-production">Building for Production</h2>
+<p>Build your site for deployment:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #B392F0;">zola</span><span style="color: #9ECBFF;"> build</span></span></code></pre>
+<p>The static site is generated in the <code>public/</code> directory. Upload these files to any static hosting service.</p>
+<h2 id="deployment-to-github-pages">Deployment to GitHub Pages</h2>
+<p>Create <code>.github/workflows/deploy.yml</code>:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="yaml"><span class="giallo-l"><span style="color: #85E89D;">name</span><span>:</span><span style="color: #9ECBFF;"> Deploy to GitHub Pages</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #79B8FF;">on</span><span>:</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">  push</span><span>:</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    branches</span><span>: [</span><span style="color: #9ECBFF;">main</span><span>]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #85E89D;">jobs</span><span>:</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">  build</span><span>:</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    runs-on</span><span>:</span><span style="color: #9ECBFF;"> ubuntu-latest</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">    steps</span><span>:</span></span>
+<span class="giallo-l"><span>      -</span><span style="color: #85E89D;"> uses</span><span>:</span><span style="color: #9ECBFF;"> actions/checkout@v2</span></span>
+<span class="giallo-l"><span>      </span></span>
+<span class="giallo-l"><span>      -</span><span style="color: #85E89D;"> name</span><span>:</span><span style="color: #9ECBFF;"> Install Zola</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        run</span><span>:</span><span style="color: #F97583;"> |</span></span>
+<span class="giallo-l"><span style="color: #9ECBFF;">          wget https://github.com/getzola/zola/releases/download/v0.18.0/zola-v0.18.0-x86_64-unknown-linux-gnu.tar.gz</span></span>
+<span class="giallo-l"><span style="color: #9ECBFF;">          tar xzf zola-v0.18.0-x86_64-unknown-linux-gnu.tar.gz</span></span>
+<span class="giallo-l"><span style="color: #9ECBFF;">          sudo mv zola /usr/local/bin/</span></span>
+<span class="giallo-l"><span style="color: #9ECBFF;">      </span></span>
+<span class="giallo-l"><span>      -</span><span style="color: #85E89D;"> name</span><span>:</span><span style="color: #9ECBFF;"> Build</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        run</span><span>:</span><span style="color: #9ECBFF;"> zola build</span></span>
+<span class="giallo-l"><span>      </span></span>
+<span class="giallo-l"><span>      -</span><span style="color: #85E89D;"> name</span><span>:</span><span style="color: #9ECBFF;"> Deploy</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        uses</span><span>:</span><span style="color: #9ECBFF;"> peaceiris/actions-gh-pages@v3</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">        with</span><span>:</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">          github_token</span><span>:</span><span style="color: #9ECBFF;"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span class="giallo-l"><span style="color: #85E89D;">          publish_dir</span><span>:</span><span style="color: #9ECBFF;"> ./public</span></span></code></pre>
+<p>Push to GitHub, enable GitHub Pages in your repository settings, and your blog deploys automatically on every push.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>Your blog is now functional. Consider adding:</p>
+<p><strong>Featured posts</strong>: Add a <code>featured</code> field to front matter and filter in templates
+<strong>Reading time</strong>: Use <code>{{ page.reading_time }}</code> to show estimated reading time
+<strong>Table of contents</strong>: Enable <code>insert_anchor_links = "left"</code> in config for heading anchors
+<strong>Search</strong>: Implement search with Zola's search index feature
+<strong>Comments</strong>: Integrate a commenting system like utterances or Disqus
+<strong>Analytics</strong>: Add analytics with a simple script include</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p>Creating a blog with Zola is refreshingly straightforward:</p>
+<ol>
+<li><strong>Content is just Markdown</strong> with front matter—no complex APIs or abstractions</li>
+<li><strong>Templates are Tera</strong>—if you know Jinja2, you already know 90% of what you need</li>
+<li><strong>Built-in features eliminate plugins</strong>—Sass, syntax highlighting, RSS, and taxonomies work out of the box</li>
+<li><strong>Fast iteration</strong>—changes appear instantly during development</li>
+<li><strong>Simple deployment</strong>—static files can be hosted anywhere</li>
+</ol>
+<p>The key to productive Zola development is embracing its opinions. The structure might feel restrictive at first, but it eliminates decision fatigue and lets you focus on content.</p>
+<p>Start simple, write content, and expand as you need more features. Zola gets out of your way and lets you build.</p>
+
+    </div>
+
+    <!-- Previous / Next Navigation -->
+    
+    <nav class="post-pagination" aria-label="Article Navigation">
+        
+        <a href="https://josegarcia.dev/writing/how-i-spent-one-week-with-zola/" class="pagination-box prev">
+            <span class="pagination-label">← OLDER</span>
+            <span class="pagination-title">How I Spent One Week with Zola</span>
+        </a>
+        
+        
+        <a href="https://josegarcia.dev/writing/why-zola-might-be-your-next-ssg/" class="pagination-box next">
+            <span class="pagination-label">NEWER →</span>
+            <span class="pagination-title">Why Zola Might Be Your Next Static Site Generator</span>
+        </a>
+        
+    </nav>
+    
+</article>
+
+        </main>
+
+        <!-- Retro Minimalist Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-meta">
+                    <span class="mono-label">SYS // ZOLA 0.23.6</span>
+                    <span class="footer-sep">·</span>
+                    <span>© 2026 Jose Garcia</span>
+                </div>
+                <ul class="footer-links">
+                    
+                        <li><a href="/writing">Writing</a></li>
+                    
+                        <li><a href="/microblog">Microblog</a></li>
+                    
+                        <li><a href="/tags">Tags</a></li>
+                    
+                        <li><a href="/atom.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://josegarcia.dev/js/main.js"></script>
+</body>
+</html>

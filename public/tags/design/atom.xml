@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Jose Garcia - Design</title>
+    <subtitle>Software Developer — Rust, System Architecture, and Technical Writing.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://josegarcia.dev/tags/design/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://josegarcia.dev"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-11-17T00:00:00+00:00</updated>
+    <id>https://josegarcia.dev/tags/design/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rebuilding this site with a retro-minimalist layout</title>
+        <published>2026-11-17T00:00:00+00:00</published>
+        <updated>2026-11-17T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Jose Garcia</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://josegarcia.dev/microblog/rebuilding-site-retro-minimal/"/>
+        <id>https://josegarcia.dev/microblog/rebuilding-site-retro-minimal/</id>
+        
+        <content type="html" xml:base="https://josegarcia.dev/microblog/rebuilding-site-retro-minimal/">&lt;p&gt;Moved the templates out of a nested theme directory directly into the repository root and stripped away everything non-essential. Inspired by classic technical notebooks and early computing manuals: warm paper tones, crisp &lt;code&gt;1px&lt;/code&gt; borders, monospace metadata, and zero layout bloat.&lt;/p&gt;
+</content>
+        
+    </entry>
+</feed>

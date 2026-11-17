@@ -1,53 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://josegarcia.dev/</loc>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/about/</loc>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/</loc>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/featured/</loc>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/featured/page/1/</loc>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/featured/why-zola-might-be-your-next-ssg/</loc>
-        <lastmod>2025-11-16</lastmod>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/featured/zola-vs-astro-traditional-ssg-meets-modern-javascript/</loc>
-        <lastmod>2025-11-15</lastmod>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/featured/zola-vs-hugo-choosing-between-two-speed-demons/</loc>
-        <lastmod>2025-11-14</lastmod>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/featured/zola-vs-pelican-rust-simplicity-meets-python-flexibility/</loc>
-        <lastmod>2025-11-13</lastmod>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/posts/</loc>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/posts/creating-blog-with-zola-a-practical-guide/</loc>
-        <lastmod>2025-11-19</lastmod>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/posts/how-i-spent-one-week-with-zola/</loc>
-        <lastmod>2025-11-20</lastmod>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/posts/migrating-from-wordpress-to-zola/</loc>
-        <lastmod>2025-11-21</lastmod>
-    </url>
-    <url>
-        <loc>https://josegarcia.dev/articles/posts/page/1/</loc>
     </url>
     <url>
         <loc>https://josegarcia.dev/categories/</loc>
@@ -65,6 +19,21 @@
         <loc>https://josegarcia.dev/categories/simple-post/page/1/</loc>
     </url>
     <url>
+        <loc>https://josegarcia.dev/microblog/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/microblog/cleaning-messy-datasets/</loc>
+        <lastmod>2026-03-11</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/microblog/rebuilding-site-retro-minimal/</loc>
+        <lastmod>2026-11-17</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/microblog/single-binary-tools/</loc>
+        <lastmod>2026-03-10</lastmod>
+    </url>
+    <url>
         <loc>https://josegarcia.dev/tags/</loc>
     </url>
     <url>
@@ -72,6 +41,12 @@
     </url>
     <url>
         <loc>https://josegarcia.dev/tags/bloging/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/tags/design/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/tags/design/page/1/</loc>
     </url>
     <url>
         <loc>https://josegarcia.dev/tags/hugo/</loc>
@@ -86,15 +61,64 @@
         <loc>https://josegarcia.dev/tags/javascript/page/1/</loc>
     </url>
     <url>
+        <loc>https://josegarcia.dev/tags/pandas/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/tags/pandas/page/1/</loc>
+    </url>
+    <url>
         <loc>https://josegarcia.dev/tags/python/</loc>
     </url>
     <url>
         <loc>https://josegarcia.dev/tags/python/page/1/</loc>
     </url>
     <url>
+        <loc>https://josegarcia.dev/tags/rust/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/tags/rust/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/tags/tooling/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/tags/tooling/page/1/</loc>
+    </url>
+    <url>
         <loc>https://josegarcia.dev/tags/zola/</loc>
     </url>
     <url>
         <loc>https://josegarcia.dev/tags/zola/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/</loc>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/creating-blog-with-zola-a-practical-guide/</loc>
+        <lastmod>2025-11-19</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/how-i-spent-one-week-with-zola/</loc>
+        <lastmod>2025-11-20</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/migrating-from-wordpress-to-zola/</loc>
+        <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/why-zola-might-be-your-next-ssg/</loc>
+        <lastmod>2025-11-16</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/zola-vs-astro-traditional-ssg-meets-modern-javascript/</loc>
+        <lastmod>2025-11-15</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/zola-vs-hugo-choosing-between-two-speed-demons/</loc>
+        <lastmod>2025-11-14</lastmod>
+    </url>
+    <url>
+        <loc>https://josegarcia.dev/writing/zola-vs-pelican-rust-simplicity-meets-python-flexibility/</loc>
+        <lastmod>2025-11-13</lastmod>
     </url>
 </urlset>

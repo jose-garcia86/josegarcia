@@ -1,243 +1,160 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        <link rel="stylesheet" href="https://josegarcia.dev/css/styles.css" />
-        
-    </head>
-    <body>
-        <header>
-    <!-- Mobile Menu Backdrop -->
-    <div class="mobile-menu-backdrop"></div>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-wrapper">
-            <!-- Logo -->
-            <div class="logo-container">
-                <a href="https:&#x2F;&#x2F;josegarcia.dev" class="logo-link">
-                    <span class="logo-text">Inkspire</span>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jose Garcia — Software Developer</title>
+    <meta name="description" content="Software Developer — Rust, System Architecture, and Technical Writing." />
+    
+    <link rel="alternate" type="application/atom+xml" title="Jose Garcia Atom Feed" href="https://josegarcia.dev/atom.xml" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://josegarcia.dev/css/styles.css" />
+    <script>
+        // Apply saved or system theme before first paint to prevent flash
+        (function () {
+            try {
+                var saved = localStorage.getItem("theme");
+                if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <div class="site-shell">
+        <!-- Top System Bar / Navigation -->
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="brand-link" aria-label="Jose Garcia Home">
+                    <span class="brand-dot" aria-hidden="true"></span>
+                    <span class="brand-name">Jose Garcia</span>
+                    <span class="brand-handle">~/josegarcia.dev</span>
                 </a>
-            </div>
 
-            <!-- Desktop Navigation -->
-            <ul class="desktop-nav">
-                
-                
-                    
-                
-
-                
-                    <li class="">
+                <div class="header-controls">
+                    <nav class="site-nav" aria-label="Primary Navigation">
                         
-                            <a href="/" class="nav-link">Home</a>
-                        
-                    </li>
-                
-                    <li class="">
-                        
-                            <a href="/articles" class="nav-link">Articles</a>
-                        
-                    </li>
-                
-                    <li class="">
-                        
-                            <a href="/about" class="nav-link">About</a>
-                        
-                    </li>
-                
-                    <li class=" dropdown-container ">
-                        
-                            <button class="nav-link dropdown-trigger">
-                                <span>Pages</span>
-                                <svg class="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                            <div class="dropdown-menu">
+                            
+                            
                                 
-                                    <a href="/tags" class="dropdown-item">Tags</a>
+                            
+                            <a href="/" class="nav-link">
+                                About
+                            </a>
+                        
+                            
+                            
                                 
-                                    <a href="/categories" class="dropdown-item">Categories</a>
+                            
+                            <a href="/writing" class="nav-link">
+                                Writing
+                            </a>
+                        
+                            
+                            
                                 
-                            </div>
+                            
+                            <a href="/microblog" class="nav-link">
+                                Microblog
+                            </a>
                         
-                    </li>
-                
-            </ul>
+                    </nav>
 
-            <!-- Language Switcher -->
-            
-
-            <!-- Mobile Hamburger Menu -->
-            <button class="hamburger">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu">
-            <!-- Close Button -->
-            <button class="mobile-close-btn">
-                <svg class="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-
-            <div class="mobile-menu-content">
-                <!-- Logo -->
-                <div class="mobile-logo">
-                    <a href="https:&#x2F;&#x2F;josegarcia.dev" class="logo-link">
-                        <span class="logo-text">Inkspire</span>
-                    </a>
-                </div>
-
-                <div class="mobile-nav-links">
-                    
-                        
-                            <a href="/" class="mobile-nav-item mobile-nav-link">Home</a>
-                        
-                    
-                        
-                            <a href="/articles" class="mobile-nav-item mobile-nav-link">Articles</a>
-                        
-                    
-                        
-                            <a href="/about" class="mobile-nav-item mobile-nav-link">About</a>
-                        
-                    
-                        
-                            <!-- Mobile Dropdown -->
-                            <div class="mobile-dropdown mobile-nav-item">
-                                <button class="mobile-nav-link mobile-dropdown-trigger">
-                                    <span>Pages</span>
-                                    <svg class="mobile-dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="mobile-dropdown-content">
-                                    
-                                        <a href="/tags" class="mobile-dropdown-link">Tags</a>
-                                    
-                                        <a href="/categories" class="mobile-dropdown-link">Categories</a>
-                                    
-                                </div>
-                            </div>
-                        
-                    
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-        <main>
-<div class="container">
-    <div class="header">
-        <h1>Tags</h1>
-        <p>Explore all the topics we cover</p>
-    </div>
-
-    <div class="topics-count">5 TOPICS</div>
-
-    <div class="tags-grid">
-        
-        <div class="tag-card">
-            <a href="https://josegarcia.dev/tags/bloging/">
-                <div class="tag-name">Bloging</div>
-                <div class="tag-count">3 posts</div>
-            </a>
-        </div>
-        
-        <div class="tag-card">
-            <a href="https://josegarcia.dev/tags/hugo/">
-                <div class="tag-name">Hugo</div>
-                <div class="tag-count">1 posts</div>
-            </a>
-        </div>
-        
-        <div class="tag-card">
-            <a href="https://josegarcia.dev/tags/javascript/">
-                <div class="tag-name">JavaScript</div>
-                <div class="tag-count">1 posts</div>
-            </a>
-        </div>
-        
-        <div class="tag-card">
-            <a href="https://josegarcia.dev/tags/python/">
-                <div class="tag-name">Python</div>
-                <div class="tag-count">1 posts</div>
-            </a>
-        </div>
-        
-        <div class="tag-card">
-            <a href="https://josegarcia.dev/tags/zola/">
-                <div class="tag-name">Zola</div>
-                <div class="tag-count">7 posts</div>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-</main>
-        <!-- Footer -->
-<footer class="footer">
-    <div class="footer-container">
-        <!-- Newsletter Section -->
-        <div class="newsletter-section">
-            <h2 class="newsletter-title">Subscribe to the newsletter</h2>
-            <p class="newsletter-description">
-                Get notified when new articles are published. No spam,
-                unsubscribe anytime.
-            </p>
-
-            <form class="newsletter-form" action="#" method="post">
-                <div class="form-group">
-                    <input
-                        type="email"
-                        class="newsletter-input"
-                        placeholder="your@email.com"
-                        required
-                        aria-label="Email address"
-                    />
-                    <button type="submit" class="newsletter-button">
-                        Subscribe
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle light/dark mode">
+                        <span class="theme-toggle-label" data-theme-label>PAPER</span>
                     </button>
                 </div>
-            </form>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="site-main">
+            
+<div class="page-taxonomy">
+    <header class="page-header retro-panel">
+        <div class="panel-bar">
+            <span class="panel-index">TAXONOMY // TAGS</span>
+            <span class="panel-count">9 TAGS</span>
         </div>
-
-        <!-- Divider -->
-        <div class="footer-divider"></div>
-
-        <!-- Footer Links & Info -->
-        <ul class="footer-content">
-            
-            
-                
-            
-            
-                <li class="footer-links"><a href="/articles" class="footer-link">Articles</a></li>
-            
-                <li class="footer-links"><a href="/about" class="footer-link">About</a></li>
-            
-                <li class="footer-links"><a href="/atom.xml" class="footer-link">RSS</a></li>
-            
-
-        </ul>
-        <div class="footer-info">
-            <p class="copyright">© 2025 Clubhype. Powered by <a href="https://www.getzola.org" target="_blank">Zola</a> and <a href="#">Inkspire</a>.</p>
+        <div class="page-header-body">
+            <h1 class="page-title">Tags</h1>
+            <p class="page-subtitle">Browse writing and notes by topic.</p>
         </div>
+    </header>
+
+    <section class="retro-section">
+        <div class="tag-cloud">
+            
+            <a href="https://josegarcia.dev/tags/bloging/" class="retro-badge">
+                #Bloging <span class="badge-count">(3)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/design/" class="retro-badge">
+                #Design <span class="badge-count">(1)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/hugo/" class="retro-badge">
+                #Hugo <span class="badge-count">(1)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/javascript/" class="retro-badge">
+                #JavaScript <span class="badge-count">(1)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/pandas/" class="retro-badge">
+                #Pandas <span class="badge-count">(1)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/python/" class="retro-badge">
+                #Python <span class="badge-count">(2)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/rust/" class="retro-badge">
+                #Rust <span class="badge-count">(1)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/tooling/" class="retro-badge">
+                #Tooling <span class="badge-count">(1)</span>
+            </a>
+            
+            <a href="https://josegarcia.dev/tags/zola/" class="retro-badge">
+                #Zola <span class="badge-count">(8)</span>
+            </a>
+            
+        </div>
+    </section>
+</div>
+
+        </main>
+
+        <!-- Retro Minimalist Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-meta">
+                    <span class="mono-label">SYS // ZOLA 0.23.6</span>
+                    <span class="footer-sep">·</span>
+                    <span>© 2026 Jose Garcia</span>
+                </div>
+                <ul class="footer-links">
+                    
+                        <li><a href="/writing">Writing</a></li>
+                    
+                        <li><a href="/microblog">Microblog</a></li>
+                    
+                        <li><a href="/tags">Tags</a></li>
+                    
+                        <li><a href="/atom.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </footer>
     </div>
-</footer>
 
-
-        <script src="https://josegarcia.dev/js/main.js"></script>
-    </body>
+    <script src="https://josegarcia.dev/js/main.js"></script>
+</body>
 </html>

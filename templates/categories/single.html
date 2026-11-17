@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-taxonomy-single">
+    <header class="page-header retro-panel">
+        <div class="panel-bar">
+            <a href="/categories" class="back-link">← ALL CATEGORIES</a>
+            <span class="panel-count">{{ term.pages | length }} ENTRIES</span>
+        </div>
+        <div class="page-header-body">
+            <h1 class="page-title">{{ term.name }}</h1>
+        </div>
+    </header>
+
+    <section class="retro-section">
+        {% set pages = paginator.pages | default(value=term.pages) %}
+        <div class="post-index-list">
+            {% for page in pages %}
+            <a href="{{ page.permalink }}" class="post-index-row">
+                <span class="post-index-title">{{ page.title }}</span>
+                <span class="post-index-leader"></span>
+                {% if page.date %}
+                <time class="post-index-date" datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+                {% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock content %}

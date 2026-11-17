@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-microblog">
+    <header class="page-header retro-panel">
+        <div class="panel-bar">
+            <span class="panel-index">LOG // MICROBLOG</span>
+            <span class="panel-count">{{ section.pages | length }} NOTES</span>
+        </div>
+        <div class="page-header-body">
+            <h1 class="page-title">{{ section.title }}</h1>
+            {% if section.description %}
+            <p class="page-subtitle">{{ section.description }}</p>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Short-form stream of microblog entries -->
+    <div class="microblog-stream">
+        {% for note in section.pages %}
+        <article class="micro-card retro-panel" id="{{ note.slug }}">
+            <div class="panel-bar micro-card-bar">
+                <time class="micro-date" datetime="{{ note.date }}">
+                    {{ note.date | date(format="%Y-%m-%d") }}
+                </time>
+                <div class="micro-meta-right">
+                    {% if note.taxonomies.tags %}
+                        {% for tag in note.taxonomies.tags %}
+                            <a href="{{ get_taxonomy_url(kind='tags', term=tag) }}" class="micro-tag">#{{ tag }}</a>
+                        {% endfor %}
+                    {% endif %}
+                    <a href="{{ note.permalink }}" class="micro-permalink" title="Permalink">#</a>
+                </div>
+            </div>
+            <div class="micro-card-body">
+                {% if note.title %}
+                <h2 class="micro-title">
+                    <a href="{{ note.permalink }}">{{ note.title }}</a>
+                </h2>
+                {% endif %}
+                <div class="prose micro-prose">
+                    {{ note.content | safe }}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

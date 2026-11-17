@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zola vs Astro: Traditional SSG Meets Modern JavaScript — Jose Garcia</title>
+    <meta name="description" content="Zola and Astro represent two different philosophies in static site generation: single binary simplicity versus JavaScript ecosystem integration. Understanding their approaches helps you pick the right tool for your project." />
+    
+    <link rel="alternate" type="application/atom+xml" title="Jose Garcia Atom Feed" href="https://josegarcia.dev/atom.xml" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://josegarcia.dev/css/styles.css" />
+    <script>
+        // Apply saved or system theme before first paint to prevent flash
+        (function () {
+            try {
+                var saved = localStorage.getItem("theme");
+                if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <div class="site-shell">
+        <!-- Top System Bar / Navigation -->
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="brand-link" aria-label="Jose Garcia Home">
+                    <span class="brand-dot" aria-hidden="true"></span>
+                    <span class="brand-name">Jose Garcia</span>
+                    <span class="brand-handle">~/josegarcia.dev</span>
+                </a>
+
+                <div class="header-controls">
+                    <nav class="site-nav" aria-label="Primary Navigation">
+                        
+                            
+                            
+                                
+                            
+                            <a href="/" class="nav-link">
+                                About
+                            </a>
+                        
+                            
+                            
+                                
+                                    
+                                
+                            
+                            <a href="/writing" class="nav-link active">
+                                Writing
+                            </a>
+                        
+                            
+                            
+                                
+                            
+                            <a href="/microblog" class="nav-link">
+                                Microblog
+                            </a>
+                        
+                    </nav>
+
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle light/dark mode">
+                        <span class="theme-toggle-label" data-theme-label>PAPER</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="site-main">
+            
+<article class="single-post">
+    <!-- Top Article Metadata Panel -->
+    <header class="post-header retro-panel">
+        <div class="panel-bar">
+            
+                
+                <a href="https://josegarcia.dev/writing/" class="back-link">← WRITING</a>
+            
+            <div class="post-meta-bar">
+                
+                <time datetime="2025-11-15">2025-11-15</time>
+                
+                
+                <span class="meta-sep">·</span>
+                <span>5 MIN READ</span>
+                
+            </div>
+        </div>
+
+        <div class="post-header-body">
+            <h1 class="post-title">Zola vs Astro: Traditional SSG Meets Modern JavaScript</h1>
+            
+            <p class="post-subtitle">Zola and Astro represent two different philosophies in static site generation: single binary simplicity versus JavaScript ecosystem integration. Understanding their approaches helps you pick the right tool for your project.</p>
+            
+
+            
+            <div class="post-tags">
+                
+                <a href="https://josegarcia.dev/tags/zola/" class="retro-badge">#Zola</a>
+                
+                <a href="https://josegarcia.dev/tags/javascript/" class="retro-badge">#JavaScript</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <div class="prose post-prose">
+        <p>At first glance, comparing Zola and Astro might seem odd. One is a traditional static site generator built in Rust. The other is a modern JavaScript framework with an islands architecture. But both excel at building fast static sites, and both claim to make the process simpler. The question is: which kind of simplicity do you need?</p>
+<h2 id="philosophy-everything-included-vs-bring-your-own">Philosophy: Everything Included vs Bring Your Own</h2>
+<p>Zola ships as a single binary with everything built-in. Download one file, and you have templating, Sass compilation, syntax highlighting, image processing, and live reload. No npm, no node_modules, no build configuration.</p>
+<p>Astro is a JavaScript framework that embraces the npm ecosystem. You install it via npm, configure it through JavaScript, and extend it with integrations. Want to use React components? Install the React integration. Need Tailwind? Add it. The philosophy is composition over inclusion.</p>
+<p>This isn't a value judgment—it's a fundamental difference in approach. Zola says "here's everything you need." Astro says "here's a foundation, add what you want."</p>
+<h2 id="installation-and-setup">Installation and Setup</h2>
+<p>Getting started with Zola:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #6A737D;"># Download binary</span></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Add to PATH</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">zola</span><span style="color: #9ECBFF;"> init my-site</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">zola</span><span style="color: #9ECBFF;"> serve</span></span></code></pre>
+<p>Getting started with Astro:</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #B392F0;">npm</span><span style="color: #9ECBFF;"> create astro@latest</span></span>
+<span class="giallo-l"><span style="color: #6A737D;"># Answer interactive prompts</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">npm</span><span style="color: #9ECBFF;"> run dev</span></span></code></pre>
+<p>Zola's approach means no node_modules folder, no package.json, no dependency updates. Your project is just your content and templates.</p>
+<p>Astro's approach means you're in the JavaScript ecosystem with all its benefits and complexities. You get access to npm packages, but you also manage dependencies.</p>
+<h2 id="component-model-templates-vs-javascript-components">Component Model: Templates vs JavaScript Components</h2>
+<p>Zola uses Tera templates. You write HTML with template syntax for loops, conditionals, and macros. It's server-side templating—what you write is what gets rendered to HTML.</p>
+<p>Astro lets you write components in Astro syntax (which looks like JSX) and can integrate React, Vue, Svelte, or Solid components. You can mix and match frameworks in the same project. This is powerful if you want to reuse existing components or prefer a component-driven architecture.</p>
+<p>Here's the trade-off: Zola's templates are simpler but less powerful for interactive components. Astro's components are more complex but give you the full JavaScript ecosystem.</p>
+<h2 id="content-management">Content Management</h2>
+<p>Both use Markdown for content, but they handle it differently.</p>
+<p>Zola has a structured content model with sections and pages. Front matter is strict but predictable. You organize content by directories, and Zola automatically generates routes. It's opinionated about structure, which reduces decisions.</p>
+<p>Astro is more flexible. You can put Markdown files anywhere, use content collections for structured data, or pull content from CMSs or APIs at build time. This flexibility is useful for complex sites but requires more decision-making.</p>
+<h2 id="performance-both-fast-different-reasons">Performance: Both Fast, Different Reasons</h2>
+<p>Zola is fast because it's Rust. Build times are measured in milliseconds. It rebuilds incrementally during development, and changes appear nearly instantly.</p>
+<p>Astro is fast because it ships zero JavaScript by default. Your site is pure HTML and CSS unless you opt into client-side interactivity. When you do add JavaScript, Astro's islands architecture only hydrates the components that need it.</p>
+<p>In practice, both produce fast sites. Zola achieves this through traditional static generation. Astro achieves it through clever JavaScript optimization.</p>
+<h2 id="interactivity-and-javascript">Interactivity and JavaScript</h2>
+<p>This is where the paths diverge significantly.</p>
+<p>Zola doesn't have a story for complex client-side interactivity. You can add vanilla JavaScript, but if you need a React component or Vue widget, you're integrating it manually. Zola excels at static, content-focused sites.</p>
+<p>Astro was built for partial hydration. You can have an entirely static blog post with one interactive widget that loads React only for that component. This is Astro's killer feature—progressive enhancement through islands architecture.</p>
+<p>If your site is mostly static with occasional interactivity, Astro gives you a clear path forward. If your site is entirely static, Zola's simplicity might be preferable.</p>
+<h2 id="styling-and-assets">Styling and Assets</h2>
+<p>Zola has built-in Sass compilation. Write <code>.scss</code> files, and Zola handles them. For other assets, you put them in the static folder, and they're copied as-is.</p>
+<p>Astro integrates with modern tooling. You can use Tailwind, CSS-in-JS, CSS Modules, or whatever the JavaScript ecosystem offers. Asset optimization happens through Vite, Astro's build tool.</p>
+<p>Zola's approach is simpler but more limited. Astro's approach gives you more options but requires configuration.</p>
+<h2 id="ecosystem-and-integrations">Ecosystem and Integrations</h2>
+<p>Zola's ecosystem is minimal. There are some themes and a small community. You're mostly building from scratch or adapting existing HTML/CSS templates.</p>
+<p>Astro's ecosystem is growing rapidly. There are integrations for CMSs, image optimization, analytics, and more. You can use any npm package. The community is active, and new integrations appear regularly.</p>
+<p>If you want to integrate with modern web development tools—TypeScript, Tailwind, MDX, image optimization, analytics—Astro makes this straightforward. With Zola, you're on your own.</p>
+<h2 id="multilingual-sites">Multilingual Sites</h2>
+<p>Zola has first-class multilingual support. Create content in multiple languages, and Zola handles routing and structure automatically. It's straightforward and requires minimal configuration.</p>
+<p>Astro supports multilingual sites through routing configuration and content collections. It's more manual but also more flexible. You control exactly how languages are handled.</p>
+<h2 id="learning-curve">Learning Curve</h2>
+<p>Zola's learning curve is gentle if you know HTML and are comfortable with template syntax. There's one templating language to learn (Tera), and the mental model is simple: templates render content to HTML.</p>
+<p>Astro's learning curve depends on your JavaScript experience. If you're comfortable with modern JavaScript, JSX, and component thinking, Astro feels natural. If you're new to this ecosystem, there's more to learn: component syntax, props, islands, integrations.</p>
+<h2 id="developer-experience">Developer Experience</h2>
+<p>Zola's DX is about simplicity. Fast builds, simple mental model, no toolchain configuration. You focus on content and templates. The live reload is nearly instant.</p>
+<p>Astro's DX is about power and flexibility. You get TypeScript support, component frameworks, modern tooling, and extensive integrations. The development server is fast, and error messages are helpful.</p>
+<h2 id="when-to-choose-astro">When to Choose Astro</h2>
+<p>Pick Astro if you:</p>
+<ul>
+<li>Need to mix static content with interactive components</li>
+<li>Want to use React, Vue, or Svelte components</li>
+<li>Need integration with modern JavaScript tooling</li>
+<li>Plan to pull content from APIs or CMSs</li>
+<li>Want TypeScript support out of the box</li>
+<li>Need to progressively enhance static pages with interactivity</li>
+<li>Are comfortable with npm and JavaScript tooling</li>
+</ul>
+<h2 id="when-to-choose-zola">When to Choose Zola</h2>
+<p>Pick Zola if you:</p>
+<ul>
+<li>Want zero dependency installation and maintenance</li>
+<li>Are building a content-focused site (blog, docs, portfolio)</li>
+<li>Prefer simplicity over flexibility</li>
+<li>Don't need complex client-side interactivity</li>
+<li>Want built-in Sass without configuration</li>
+<li>Value fast builds with minimal tooling</li>
+<li>Prefer a single binary over a JavaScript toolchain</li>
+</ul>
+<h2 id="the-real-decision-point">The Real Decision Point</h2>
+<p>The choice between Zola and Astro isn't about which is better—it's about which model fits your project and preferences.</p>
+<p>Choose based on your site's needs:</p>
+<ul>
+<li>Pure static content with minimal interactivity? Zola's simplicity shines.</li>
+<li>Mix of static content and interactive components? Astro's islands architecture is perfect.</li>
+<li>Want to avoid JavaScript tooling entirely? Zola gives you that.</li>
+<li>Need the JavaScript ecosystem and its packages? Astro provides access.</li>
+</ul>
+<p>Both will give you fast, performant sites. Zola does it with traditional static generation and zero dependencies. Astro does it with modern JavaScript tooling and optional interactivity.</p>
+<p>Neither is wrong. Pick the one that matches how you want to work, not just what you want to build.</p>
+
+    </div>
+
+    <!-- Previous / Next Navigation -->
+    
+    <nav class="post-pagination" aria-label="Article Navigation">
+        
+        <a href="https://josegarcia.dev/writing/why-zola-might-be-your-next-ssg/" class="pagination-box prev">
+            <span class="pagination-label">← OLDER</span>
+            <span class="pagination-title">Why Zola Might Be Your Next Static Site Generator</span>
+        </a>
+        
+        
+        <a href="https://josegarcia.dev/writing/zola-vs-hugo-choosing-between-two-speed-demons/" class="pagination-box next">
+            <span class="pagination-label">NEWER →</span>
+            <span class="pagination-title">Zola vs Hugo: Choosing Between Two Speed Demons</span>
+        </a>
+        
+    </nav>
+    
+</article>
+
+        </main>
+
+        <!-- Retro Minimalist Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-meta">
+                    <span class="mono-label">SYS // ZOLA 0.23.6</span>
+                    <span class="footer-sep">·</span>
+                    <span>© 2026 Jose Garcia</span>
+                </div>
+                <ul class="footer-links">
+                    
+                        <li><a href="/writing">Writing</a></li>
+                    
+                        <li><a href="/microblog">Microblog</a></li>
+                    
+                        <li><a href="/tags">Tags</a></li>
+                    
+                        <li><a href="/atom.xml">RSS</a></li>
+                    
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://josegarcia.dev/js/main.js"></script>
+</body>
+</html>
