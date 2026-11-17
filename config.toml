@@ -20,6 +20,11 @@ build_search_index = false
 generate_sitemap = true
 generate_robots_txt = true
 
+taxonomies = [
+    { name = "categories", feed = true, paginate_by = 20 },
+    { name = "tags", feed = true, paginate_by = 20 },
+]
+
 # Markdown rendering configuration
 [markdown]
 render_emoji = false
@@ -55,15 +60,6 @@ paths = "on"
 taxonomies = "on"
 anchors = "on"
 paths_keep_dates = false
-
-[languages.en]
-taxonomies = [
-    { name = "categories", feed = true, paginate_by = 20 },
-    { name = "tags", feed = true, paginate_by = 20 },
-]
-
-[languages.en.translations]
-language_name = "English"
 
 [extra]
 author = "Jose Garcia"
